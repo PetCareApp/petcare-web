@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>cap7</groupId>
+  <artifactId>petcare</artifactId>
+  <version>0.1</version>
+  <packaging>war</packaging>
+  
+  <properties>
+  	<!-- Spring Framework -->
+  	<spring.framework.version>4.2.5.RELEASE</spring.framework.version>
+  
+  	<!-- Spring Secutiry -->
+  	<spring.security.version>4.0.4.RELEASE</spring.security.version>
+	
+	<!-- Commons Logging -->
+	<commons.logging.version>1.2</commons.logging.version>
+	
+	<!-- Hibernate -->
+	<hibernate.version>5.1.0.Final</hibernate.version>
+	
+	<!-- Java EE -->
+	<javax.servlet.version>3.1.0</javax.servlet.version>
+	<jstl.version>1.2</jstl.version>
+	<javax.inject.version>1</javax.inject.version>
+	
+  </properties>
+  
+  <repositories>
+	<repository>
+		<id>npi-mvn-repo</id>
+		<url>http://npi-ufc-qxd.github.io/npi-mvn-repo/</url>
+	</repository>
+</repositories>
+  
+  <dependencies>
+  
+  	<!-- Spring Framework -->
+  	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${spring.framework.version}</version>
+	</dependency>
+
+  	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${spring.framework.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+		<version>${spring.framework.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>${spring.framework.version}</version>
+	</dependency>
+  	
+  
+  	<!-- Spring Secutiry -->
+  	<dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${spring.security.version}</version>
+    </dependency>
+    
+    <dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-config</artifactId>
+	    <version>${spring.security.version}</version>
+	  </dependency>
+	
+	<!-- Commons Logging -->
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>${commons.logging.version}</version>
+	</dependency>
+	
+	<!-- Hibernate -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	
+	<!-- Java EE / Java SE dependencies -->
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<version>${javax.servlet.version}</version>
+		<scope>provided</scope>
+	</dependency>
+	
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jstl</artifactId>
+		<version>${jstl.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>javax.inject</groupId>
+		<artifactId>javax.inject</artifactId>
+		<version>${javax.inject.version}</version>
+	</dependency>
+	
+  </dependencies>
+  
+  <build>
+  	<finalName>petcare</finalName>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			<configuration>
+  				<source>1.8</source>
+  				<target>1.8</target>
+  			</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+</project>

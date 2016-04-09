@@ -1,0 +1,13 @@
+#login-page {
+	width: 400px;  
+}
+
+.login-form-text {
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 0.8rem;
+}
+
+#image-login {
+	max-width: 40%;
+}
