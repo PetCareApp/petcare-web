@@ -1,33 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 	http://www.springframework.org/schema/security
-	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="true" use-expressions="false">
-		<access-denied-handler error-page="/403" />
+	<http auto-config="true">
 		<intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<intercept-url pattern="/*/admin/**" access="ROLE_ADMIN" />
-
-		<form-login login-page="/login" default-target-url="/"
-			authentication-failure-url="/loginfailed" username-parameter="login"
+		<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/**" access="ROLE_USER" /> 
+		
+		<form-login 
+		    login-page="/login" 
+		    default-target-url="/login" 
+			authentication-failure-url="/loginfailed" 
+			username-parameter="username"
 			password-parameter="password" />
-		<logout logout-success-url="/login" invalidate-session="true" />
+		<logout logout-url="/j_spring_security_logout" logout-success-url="/logout"  />
+		<!-- enable csrf protection -->
+		<csrf/>
 	</http>
 
 	<authentication-manager>
 		<authentication-provider>
-			<jdbc-user-service data-source-ref="petcare"
-				users-by-username-query="
-                    SELECT email, password
-                    FROM usuario WHERE email = ?"
-				authorities-by-username-query=
-                    "SELECT u.email, p.nome FROM usuario AS u, papel_usuario AS pu, papel AS p WHERE u.id = pu.usuario_id AND pu.papel_id = p.id AND u.email=?" />
+			<user-service>
+				<user name="mkyong" password="123456" authorities="ROLE_USER" />
+			</user-service>
 		</authentication-provider>
 	</authentication-manager>
-	<global-method-security secured-annotations="enabled" />
 
 </beans:beans>

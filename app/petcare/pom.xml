@@ -10,7 +10,7 @@
   	<spring.framework.version>4.2.5.RELEASE</spring.framework.version>
   
   	<!-- Spring Secutiry -->
-  	<spring.security.version>4.0.4.RELEASE</spring.security.version>
+  	<spring.security.version>3.2.3.RELEASE</spring.security.version>
 	
 	<!-- Commons Logging -->
 	<commons.logging.version>1.2</commons.logging.version>
