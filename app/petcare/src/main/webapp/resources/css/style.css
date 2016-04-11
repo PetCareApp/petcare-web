@@ -1,3 +1,5 @@
+/* Login Page */
+
 #login-page {
 	width: 400px;  
 }
@@ -10,4 +12,39 @@
 
 #image-login {
 	max-width: 40%;
+}
+
+header {
+	border-bottom: 2px solid rgb(68, 117, 58);
+}
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	background-color: #FFF;
+	padding: 20px;
+}
+
+.container header {
+	font-size: 20px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: #44753A;
+}
+
+
+/* Cadastrar Petshop Page */
+.nav-wrapper{
+	width: 80%;
+	margin: 0 auto;
+}
+
+.brand-logo img {
+	max-height: 64px;
+}
+
+h6 {
+	margin-top: 50px;
 }

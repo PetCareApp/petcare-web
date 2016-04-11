@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.petcare.model.Usuario;
 import br.com.petcare.service.UsuarioService;
+import br.com.petcare.util.Constants;
 
 @Controller
 public class LoginController {
@@ -19,10 +20,8 @@ public class LoginController {
 	private UsuarioService usuarioService;
 	
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
-	public String index(Model model) {
-		model.addAttribute("nome", "Spring Security Custom Login Form");
-		model.addAttribute("email", "This is welcome page!");
-		return "hello";
+	public String index() {
+		return Constants.REDIRECT_CADASTRAR_PETSHOP;
 	}
 	
 	@RequestMapping(value = { "/hello"}, method = RequestMethod.GET)

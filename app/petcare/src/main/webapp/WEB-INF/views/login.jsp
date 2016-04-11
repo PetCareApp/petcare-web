@@ -7,10 +7,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Petcare - Login</title>
-	
-	<link href="<c:url value="/resources/css/materialize.min.css"/>" type="text/css" rel="stylesheet" media="screen,projection">
-	<link href="<c:url value="/resources/css/style.css"/>" type="text/css" rel="stylesheet" media="screen,projection">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<jsp:include page="fragments/head.jsp"></jsp:include>
 </head>
 
 <body class="green lighten-4">
@@ -52,8 +49,7 @@
 	    </div>
 	</div>
 
-	<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.12.3.min.js"/>"></script>
-	<script type="text/javascript" src="<c:url value="/resources/js/materialize.min.js"/>"></script>
+	<jsp:include page="fragments/footer.jsp"></jsp:include>
 </body>
 	
 </html>
