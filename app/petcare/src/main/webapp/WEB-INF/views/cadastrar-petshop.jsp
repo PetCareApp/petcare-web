@@ -25,9 +25,11 @@
        <div class="row">
 		    <form class="col s12">
 		    	<header>Novo Pet Shop</header>
+		    	<div class="divider"></div>
 		    	<h6><i class="material-icons">pets</i> Petshop</h6>
+		    	
 		      	<div class="row">
-			        <div class="input-field col s8">
+			        <div class="input-field col s12">
 			          <input id="petshop-nome" type="text" class="validate">
 			          <label for="petshop-nome">Nome</label>
 			        </div>
