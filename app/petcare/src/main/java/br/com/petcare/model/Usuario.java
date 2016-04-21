@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -26,6 +27,17 @@ public class Usuario {
 	@ManyToMany
 	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
+	
+	@OneToMany
+	private List<Petshop> petshops;
+
+	public List<Petshop> getPetshops() {
+		return petshops;
+	}
+
+	public void setPetshops(List<Petshop> petshops) {
+		this.petshops = petshops;
+	}
 
 	public Integer getId() {
 		return id;
