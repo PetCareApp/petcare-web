@@ -9,3 +9,5 @@
 *.ear
 *.log
 *.project
+/bin/
+*.tmp
