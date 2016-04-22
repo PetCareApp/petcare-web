@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petcare - Novo Tipo de Estabelecimento</title>
+	<link th:href="@{/resources/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
+</head>
+<body class="light-green lighten-5">
+	<header>
+	  <nav class="green lighten-2">
+	    <div class="nav-wrapper">
+	      <a href="#" class="brand-logo center"><img src="" alt=""/></a>
+	      <ul id="nav-mobile" class="left hide-on-med-and-down">
+	        <li><a href="badges.html">Estabelecimentos</a></li>
+	        <li><a th:href="@{/tipo-estabelecimento/cadastrar}">Tipos de Estabelecimentos</a></li>
+	      </ul>
+	    </div>
+	  </nav>
+	</header>
+	
+	<div class="container">
+       <div class="row">
+		    <form th:object="${tipo}" th:action="@{/tipo-estabelecimento/cadastrar}" action="#" method="POST" class="col s12">
+		    	<header>Tipos de Estabelecimentos</header>
+		    	<div class="divider"></div>
+				<div class="row">
+					<div class="input-field col s8">
+						<input th:field="*{nome}" id="tipo-nome" type="text" class="validate" />
+						<label for="tipo-nome">Nome</label>
+					</div>
+					<div class="input-field col s4">
+						<button class="btn waves-effect waves-light green lighten-1" type="submit" name="action">
+						Cadastrar <i class="material-icons right">send</i>
+					</button>
+					</div>
+				</div>
+			</form>
+		  </div>
+    </div>
+    
+    <script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/materialize.min.js}"></script>
+</body>
+</html>

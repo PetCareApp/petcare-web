@@ -12,7 +12,7 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String endereco;
+	private String rua;
 	
 	private String numero;
 	
@@ -28,6 +28,8 @@ public class Endereco {
 	
 	private String cep;
 	
+	private String telefone;
+	
 	private String latitude;
 	
 	private String longitude;
@@ -40,12 +42,12 @@ public class Endereco {
 		this.id = id;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getRua() {
+		return rua;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
 	public String getNumero() {
@@ -118,6 +120,39 @@ public class Endereco {
 
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

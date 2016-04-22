@@ -2,6 +2,7 @@ package br.com.petcare.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,19 +25,27 @@ public class Usuario {
 	
 	private String password;
 	
+	private String telefone;
+	
 	@ManyToMany
 	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
 	
-	@OneToMany
-	private List<Petshop> petshops;
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
+	private List<Estabelecimento> estabelecimentos;
 
-	public List<Petshop> getPetshops() {
-		return petshops;
+	public List<Estabelecimento> getEstabelecimentos() {
+		return estabelecimentos;
 	}
-
-	public void setPetshops(List<Petshop> petshops) {
-		this.petshops = petshops;
+	
+	public void addEstabelecimento(Estabelecimento estabelecimento) {
+		if (!this.estabelecimentos.contains(estabelecimento)) {
+			this.estabelecimentos.add(estabelecimento);
+		}
+	}
+	
+	public void removeEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimentos.remove(estabelecimento);
 	}
 
 	public Integer getId() {
@@ -75,10 +84,37 @@ public class Usuario {
 		return papeis;
 	}
 
-	public void setPapeis(List<Papel> papeis) {
-		this.papeis = papeis;
+	public String getTelefone() {
+		return telefone;
 	}
-	
-	
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
 
 }
