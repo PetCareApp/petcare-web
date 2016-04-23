@@ -40,6 +40,7 @@ header {
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	color: #44753A;
+	margin-bottom: 20px;
 }
 
 
@@ -55,4 +56,17 @@ header {
 
 h6 {
 	margin-top: 50px;
+}
+
+/* Tipo Estabelecimento */
+.alert {
+	padding: 15px;
+}
+
+.alert p {
+	text-align: center;
+}
+
+.alert-success {
+	color: #4caf50;
 }

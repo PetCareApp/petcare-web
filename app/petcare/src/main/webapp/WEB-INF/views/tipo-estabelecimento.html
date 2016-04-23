@@ -24,18 +24,22 @@
        <div class="row">
 		    <form th:object="${tipo}" th:action="@{/tipo-estabelecimento/cadastrar}" action="#" method="POST" class="col s12">
 		    	<header>Tipos de Estabelecimentos</header>
-		    	<div class="divider"></div>
+				<div class="alert alert-success" th:if="${info != null}">
+					<p th:text="${info}" ></p>
+				</div>
 				<div class="row">
 					<div class="input-field col s8">
 						<input th:field="*{nome}" id="tipo-nome" type="text" class="validate" />
-						<label for="tipo-nome">Nome</label>
+						<label for="tipo-nome">Tipo de estabelecimento</label>
 					</div>
 					<div class="input-field col s4">
 						<button class="btn waves-effect waves-light green lighten-1" type="submit" name="action">
-						Cadastrar <i class="material-icons right">send</i>
-					</button>
+							Cadastrar <i class="material-icons right">send</i>
+						</button>
 					</div>
 				</div>
+
+				<div class="chip" th:each="t : ${tipos}" th:text="${t.nome}"></div>
 			</form>
 		  </div>
     </div>

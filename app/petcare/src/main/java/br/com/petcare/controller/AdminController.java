@@ -1,5 +1,7 @@
 package br.com.petcare.controller;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,10 +13,14 @@ import br.com.petcare.model.Endereco;
 import br.com.petcare.model.Estabelecimento;
 import br.com.petcare.model.TipoEstabelecimento;
 import br.com.petcare.model.Usuario;
+import br.com.petcare.service.EstabelecimentoService;
 import br.com.petcare.util.Constants;
 
 @Controller
 public class AdminController {
+	
+	@Inject
+	private EstabelecimentoService estabelecimentoService;
 	
 	@RequestMapping(value = "estabelecimento/cadastrar", method = RequestMethod.GET)
 	public String cadastrarPetshopForm(Model model) {
@@ -32,12 +38,14 @@ public class AdminController {
 	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.GET)
 	public String cadastrarTipoEstabelecimentoForm(Model model) {
 		model.addAttribute("tipo", new TipoEstabelecimento());
+		model.addAttribute("tipos", estabelecimentoService.getAllTipoEstabelecimento());
 		return Constants.PAGE_CADASTRAR_TIPO_ESTABELECIMENTO;
 	}
 	
 	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.POST)
 	public String cadastrarTipoEstabelecimento(@ModelAttribute("tipo") TipoEstabelecimento tipo, 
 			final RedirectAttributes redirectAttributes) {
+		estabelecimentoService.cadastrar(tipo);
 		redirectAttributes.addFlashAttribute("info", "Tipo de estabelecimento cadastrado com sucesso");
 		return Constants.REDIRECT_CADASTRAR_TIPO_ESTABELECIMENTO;
 	}

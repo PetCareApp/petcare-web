@@ -23,16 +23,19 @@ public class GenericRespositoryImpl<T> implements GenericRepository<T> {
 	}
 
 	@Override
+	@Transactional
 	public void save(T entity) {
 		this.em.persist(entity);
 	}
 
 	@Override
+	@Transactional
 	public void update(T entity) {
 		this.em.merge(entity);
 	}
 
 	@Override
+	@Transactional
 	public void delete(T entity) {
 		em.remove(em.merge(entity));
 	}
@@ -45,6 +48,7 @@ public class GenericRespositoryImpl<T> implements GenericRepository<T> {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<T> find(Class<T> entityClass) {
 		List<T> result = null;
 		Query q = em.createQuery("select obj from " + entityClass.getSimpleName() + " obj");
@@ -53,6 +57,7 @@ public class GenericRespositoryImpl<T> implements GenericRepository<T> {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<T> find(String query, Map<String, Object> namedParams) {
 		Query q = em.createQuery(query);
 		setNamedParameters(q, namedParams);
@@ -61,6 +66,7 @@ public class GenericRespositoryImpl<T> implements GenericRepository<T> {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public T findFirst(String query, Map<String, Object> namedParams) {
 		List<T> result = find(query, namedParams);
 		return result == null || result.size() == 0 ? null : result.get(0);
