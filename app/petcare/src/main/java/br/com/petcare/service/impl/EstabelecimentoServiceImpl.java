@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.petcare.model.Estabelecimento;
 import br.com.petcare.model.TipoEstabelecimento;
 import br.com.petcare.repository.GenericRepository;
 import br.com.petcare.service.EstabelecimentoService;
@@ -13,17 +14,25 @@ import br.com.petcare.service.EstabelecimentoService;
 public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 
 	@Inject
-	private GenericRepository<TipoEstabelecimento> tipoEstService;
+	private GenericRepository<TipoEstabelecimento> tipoEstRepo;
+	
+	@Inject
+	private GenericRepository<Estabelecimento> estabelecimentoRepo;
+	
+	@Override
+	public void cadastrar(Estabelecimento estabelecimento) {
+		estabelecimentoRepo.save(estabelecimento);
+	}
 	
 	@Override
 	public void cadastrar(TipoEstabelecimento tipoEstabelecimento) {
-		tipoEstService.save(tipoEstabelecimento);
+		tipoEstRepo.save(tipoEstabelecimento);
 		
 	}
 
 	@Override
 	public List<TipoEstabelecimento> getAllTipoEstabelecimento() {
-		return tipoEstService.find(TipoEstabelecimento.class);
+		return tipoEstRepo.find(TipoEstabelecimento.class);
 	}
 
 }

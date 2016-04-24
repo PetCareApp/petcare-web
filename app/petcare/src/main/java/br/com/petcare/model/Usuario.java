@@ -1,16 +1,9 @@
 package br.com.petcare.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -19,34 +12,9 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;
-	
 	private String email;
 	
 	private String password;
-	
-	private String telefone;
-	
-	@ManyToMany
-	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
-	private List<Papel> papeis;
-	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.REFRESH}, orphanRemoval = true)
-	private List<Estabelecimento> estabelecimentos;
-
-	public List<Estabelecimento> getEstabelecimentos() {
-		return estabelecimentos;
-	}
-	
-	public void addEstabelecimento(Estabelecimento estabelecimento) {
-		if (!this.estabelecimentos.contains(estabelecimento)) {
-			this.estabelecimentos.add(estabelecimento);
-		}
-	}
-	
-	public void removeEstabelecimento(Estabelecimento estabelecimento) {
-		this.estabelecimentos.remove(estabelecimento);
-	}
 
 	public Integer getId() {
 		return id;
@@ -54,14 +22,6 @@ public class Usuario {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -78,18 +38,6 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public List<Papel> getPapeis() {
-		return papeis;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	@Override
@@ -116,5 +64,6 @@ public class Usuario {
 			return false;
 		return true;
 	}
+	
 
 }

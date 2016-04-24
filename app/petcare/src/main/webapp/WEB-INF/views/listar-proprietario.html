@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Petcare - Novo Tipo de Estabelecimento</title>
+	<title>Petcare - Proprietários</title>
 	<link th:href="@{/resources/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
 </head>
@@ -13,7 +14,7 @@
 	    <div class="nav-wrapper">
 	      <a href="#" class="brand-logo center"><img src="" alt=""/></a>
 	      <ul id="nav-mobile" class="left hide-on-med-and-down">
-	        <li><a th:href="@{/estabelecimento/cadastrar}">Estabelecimentos</a></li>
+	        <li><a th:href="@{/proprietario/listar}">Proprietários</a></li>
 	        <li><a th:href="@{/tipo-estabelecimento/cadastrar}">Tipos de Estabelecimentos</a></li>
 	      </ul>
 	    </div>
@@ -22,29 +23,38 @@
 	
 	<div class="container">
        <div class="row">
-		    <form th:object="${tipo}" th:action="@{/tipo-estabelecimento/cadastrar}" action="#" method="POST" class="col s12">
-		    	<header>Tipos de Estabelecimentos</header>
+		    	<header>Proprietários 
+		    		<a th:href="@{/proprietario/cadastrar}" class="btn-floating btn-medium waves-effect waves-light">
+		    			<i class="material-icons">add</i>
+		    		</a>
+		    	</header>
 				<div class="alert alert-success" th:if="${info != null}">
 					<p th:text="${info}" ></p>
 				</div>
-				<div class="row">
-					<div class="input-field col s8">
-						<input th:field="*{nome}" id="tipo-nome" type="text" class="validate" required="required"/>
-						<label for="tipo-nome">Tipo de estabelecimento</label>
-					</div>
-					<div class="input-field col s4">
-						<button class="btn waves-effect waves-light green lighten-1" type="submit" name="action">
-							Cadastrar <i class="material-icons right">send</i>
-						</button>
-					</div>
-				</div>
 
-				<div class="chip" th:each="t : ${tipos}" th:text="${t.nome}"></div>
-			</form>
+				<table>
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Email</th>
+							<th>Telefone</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<tr th:each="p : ${proprietarios}">
+							<td th:text="${p.nome}"></td>
+							<td th:text="${p.usuario.email}"></td>
+							<td th:text="${p.telefone}"></td>
+						</tr>
+					</tbody>
+				</table>
 		  </div>
     </div>
     
     <script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
 	<script type="text/javascript" th:src="@{/resources/js/materialize.min.js}"></script>
 </body>
 </html>
