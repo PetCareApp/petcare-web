@@ -39,7 +39,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "proprietario/listar", method = RequestMethod.GET)
-	public String listarProprietario(Model model) {
+	public String listarProprietarios(Model model) {
 		model.addAttribute("proprietarios", proprietarioService.getAll());
 		return Constants.PAGE_LISTAR_PROPRIETARIO;
 	}
@@ -55,6 +55,12 @@ public class AdminController {
 	public String cadastrarPetshop(@ModelAttribute("estabelecimento") Estabelecimento estabelecimento) {
 		estabelecimentoService.cadastrar(estabelecimento);
 		return Constants.PAGE_CADASTRAR_ESTABELECIMENTO;
+	}
+	
+	@RequestMapping(value = "estabelecimento/listar", method = RequestMethod.GET)
+	public String listarEstabelecimentos(Model model) {
+		model.addAttribute("estabelecimentos", estabelecimentoService.getAll());
+		return Constants.PAGE_LISTAR_PROPRIETARIO;
 	}
 	
 	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.GET)

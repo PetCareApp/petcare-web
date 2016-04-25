@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Petcare - Novo Proprietário</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petcare - Estabelecimentos</title>
 	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -28,41 +28,38 @@
 			</div>
 		</nav>
 	</header>
-
+	
 	<div class="container">
-		<form th:object="${proprietario}" th:action="@{/proprietario/cadastrar}" action="#" method="POST" class="form-horizontal">
-			<h5><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Novo Proprietário</h5>
-			<div class="form-group col-sm-12">
-			  <label class="control-label" for="nome">Nome</label>
-			  <input th:field="*{nome}" class="form-control input-sm" id="nome" type="text"/>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-4">
-					<label for="email" class="control-label">Email</label>
-					<input th:field="*{usuario.email}" type="email" class="form-control input-sm" id="email"/>
-				</div>
-				<div class="col-sm-4">
-					<label for="telefone" class="control-label">Telefone</label>
-					<input th:field="*{telefone}" type="text" class="form-control input-sm" id="telefone"/>
-				</div>
-				<div class="col-sm-4">
-					<label for="senha" class="control-label">Senha</label>
-					<input th:field="*{usuario.password}" type="password" class="form-control input-sm" id="senha"/>
-				</div>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-success right" type="submit">Cadastrar</button>
-			</div>
-		</form>
-	</div>
-
-	<script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
+		<div th:if="${info != null}" class="alert alert-dismissible alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong th:text="${info}"></strong>
+		</div>
+	   	<table class="hover stripe">
+			<thead>
+				<tr>
+					<th>Estabelecimento</th>
+					<th>CNPJ</th>
+					<th>Proprietário</th>
+				</tr>
+			</thead>
+	
+			<tbody>
+				<tr th:each="est : ${estabelecimentos}">
+					<td th:text="${est.nome}"></td>
+					<td th:text="${est.cnpj}"></td>
+					<td th:text="${est.proprietario.nome}"></td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+    
+    <script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
 	<script type="text/javascript" th:src="@{/resources/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
 	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
 	
 	<script type="text/javascript">
-		$("#menu-proprietarios").addClass('active');
+		$("#menu-estabelecimentos").addClass('active');
 	</script>
 </body>
 </html>
