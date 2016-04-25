@@ -46,7 +46,7 @@
 	
 			<tbody>
 				<tr th:each="p : ${proprietarios}">
-					<td th:text="${p.nome}"></td>
+					<td><a th:text="${p.nome}" th:href="@{/proprietario/detalhes/} + ${p.id}"></a></td>
 					<td th:text="${p.usuario.email}"></td>
 					<td th:text="${p.telefone}"></td>
 				</tr>

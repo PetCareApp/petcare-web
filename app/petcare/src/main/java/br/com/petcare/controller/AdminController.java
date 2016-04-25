@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -44,8 +45,15 @@ public class AdminController {
 		return Constants.PAGE_LISTAR_PROPRIETARIO;
 	}
 	
-	@RequestMapping(value = "estabelecimento/cadastrar", method = RequestMethod.GET)
-	public String cadastrarPetshopForm(Model model) {
+	@RequestMapping(value = "proprietario/detalhes/{id}", method = RequestMethod.GET)
+	public String visualizarProprietario(@PathVariable("id") Integer idProp, Model model) {
+		model.addAttribute("proprietario", proprietarioService.find(idProp));
+		return Constants.PAGE_DETALHE_PROPRIETARIO;
+	}
+	
+	@RequestMapping(value = "estabelecimento/cadastrar/{id}", method = RequestMethod.GET)
+	public String cadastrarPetshopForm(@PathVariable("id") Integer idProp, Model model) {
+		model.addAttribute("proprietario", proprietarioService.find(idProp));
 		model.addAttribute("estabelecimento", new Estabelecimento());
 		model.addAttribute("tipos", estabelecimentoService.getAllTipoEstabelecimento());
 		return Constants.PAGE_CADASTRAR_ESTABELECIMENTO;
@@ -60,7 +68,7 @@ public class AdminController {
 	@RequestMapping(value = "estabelecimento/listar", method = RequestMethod.GET)
 	public String listarEstabelecimentos(Model model) {
 		model.addAttribute("estabelecimentos", estabelecimentoService.getAll());
-		return Constants.PAGE_LISTAR_PROPRIETARIO;
+		return Constants.PAGE_LISTAR_ESTABELECIMENTO;
 	}
 	
 	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.GET)

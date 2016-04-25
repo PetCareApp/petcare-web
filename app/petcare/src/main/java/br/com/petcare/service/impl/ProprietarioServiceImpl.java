@@ -39,6 +39,11 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		namedParams.put("nome", nome);
 		return papelRepository.findFirst("from Papel where nome = :nome", namedParams);
 	}
+
+	@Override
+	public Proprietario find(Integer id) {
+		return proprietarioRepository.find(Proprietario.class, id);
+	}
 	
 	
 

@@ -6,6 +6,8 @@ public class Constants {
 	
 	public static String PAGE_LISTAR_PROPRIETARIO = "listar-proprietario";
 	
+	public static String PAGE_DETALHE_PROPRIETARIO = "detalhe-proprietario";
+	
 	public static String PAGE_CADASTRAR_ESTABELECIMENTO = "cadastrar-estabelecimento";
 	
 	public static String PAGE_LISTAR_ESTABELECIMENTO = "listar-estabelecimento";
