@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import br.com.petcare.model.Papel;
 import br.com.petcare.model.Proprietario;
+import br.com.petcare.model.Usuario;
 import br.com.petcare.repository.GenericRepository;
 import br.com.petcare.service.ProprietarioService;
 import br.com.petcare.util.Constants;
@@ -21,6 +22,9 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	
 	@Inject
 	private GenericRepository<Papel> papelRepository;
+	
+	@Inject
+	private GenericRepository<Usuario> usuarioRepository;
 	
 	@Override
 	public List<Proprietario> getAll() {
@@ -43,6 +47,16 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	@Override
 	public Proprietario find(Integer id) {
 		return proprietarioRepository.find(Proprietario.class, id);
+	}
+
+	@Override
+	public void atualizar(Proprietario proprietario) {
+		proprietarioRepository.update(proprietario);
+	}
+
+	@Override
+	public void atualizar(Usuario usuario) {
+		usuarioRepository.update(usuario);
 	}
 	
 	

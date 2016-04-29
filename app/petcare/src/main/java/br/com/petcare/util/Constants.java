@@ -27,7 +27,9 @@ public class Constants {
 	
 	/** Mensagens **/
 	
-	public static String MSG_PROPRIETARIO_CADASTRADO_SUCESSO = "Proprietário cadastrado com sucesso";
+	public static String MSG_PROPRIETARIO_CADASTRADO = "Proprietário cadastrado com sucesso";
+	
+	public static String MSG_PROPRIETARIO_ATUALIZADO = "Proprietário atualizado com sucesso";
 	
 	public static String MSG_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Estabelecimento cadastrado com sucesso";
 	

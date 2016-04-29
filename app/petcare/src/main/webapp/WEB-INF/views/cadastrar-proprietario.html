@@ -5,6 +5,7 @@
 	<title>Petcare - Novo Proprietário</title>
 	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/font-awesome.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
@@ -30,8 +31,10 @@
 	</header>
 
 	<div class="container">
-		<form th:object="${proprietario}" th:action="@{/proprietario/cadastrar}" action="#" method="POST" class="form-horizontal">
-			<h5><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Novo Proprietário</h5>
+		<form th:object="${proprietario}" th:action="${action == 'editar'} ? @{/proprietario/editar} : @{/proprietario/cadastrar}" action="#" method="POST" class="form-horizontal">
+			<input th:field="*{id}" type="hidden"/>
+			<h5 th:if="${action != 'editar'}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Novo Proprietário</h5>
+			<h5 th:if="${action == 'editar'}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Atualizar Proprietário</h5>
 			<div class="form-group col-sm-12">
 			  <label class="control-label" for="nome">Nome</label>
 			  <input th:field="*{nome}" class="form-control input-sm" id="nome" type="text"/>
@@ -45,13 +48,16 @@
 					<label for="telefone" class="control-label">Telefone</label>
 					<input th:field="*{telefone}" type="text" class="form-control input-sm" id="telefone"/>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4" th:if="${action != 'editar'}">
 					<label for="senha" class="control-label">Senha</label>
 					<input th:field="*{usuario.password}" type="password" class="form-control input-sm" id="senha"/>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" th:if="${action != 'editar'}">
 				<button class="btn btn-success right" type="submit">Cadastrar</button>
+			</div>
+			<div class="form-group" th:if="${action == 'editar'}">
+				<button class="btn btn-success right" type="submit">Atualizar</button>
 			</div>
 		</form>
 	</div>

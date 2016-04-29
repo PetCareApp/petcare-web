@@ -32,7 +32,7 @@ public class Proprietario {
 	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
 	
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.REMOVE)
 	private List<Estabelecimento> estabelecimentos;
 
 	public List<Estabelecimento> getEstabelecimentos() {
