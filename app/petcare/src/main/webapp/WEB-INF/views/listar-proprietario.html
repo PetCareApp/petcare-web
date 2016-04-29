@@ -5,6 +5,7 @@
 	<title>Petcare - Proprietários</title>
 	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/font-awesome.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
@@ -41,6 +42,7 @@
 					<th>Nome</th>
 					<th>Email</th>
 					<th>Telefone</th>
+					<th></th>
 				</tr>
 			</thead>
 	
@@ -49,6 +51,11 @@
 					<td><a th:text="${p.nome}" th:href="@{/proprietario/detalhes/} + ${p.id}"></a></td>
 					<td th:text="${p.usuario.email}"></td>
 					<td th:text="${p.telefone}"></td>
+					<td>
+						<a th:href="@{/proprietario/editar/} + ${p.id}" class="btn btn-default btn-sm" title="Editar">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

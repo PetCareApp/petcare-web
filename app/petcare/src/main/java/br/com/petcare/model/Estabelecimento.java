@@ -22,7 +22,7 @@ public class Estabelecimento {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Endereco endereco;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	private Proprietario proprietario;
 	
 	@ManyToOne

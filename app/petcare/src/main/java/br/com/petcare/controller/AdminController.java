@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.petcare.model.Estabelecimento;
 import br.com.petcare.model.Proprietario;
 import br.com.petcare.model.TipoEstabelecimento;
+import br.com.petcare.model.Usuario;
 import br.com.petcare.service.EstabelecimentoService;
 import br.com.petcare.service.ProprietarioService;
 import br.com.petcare.util.Constants;
@@ -35,7 +36,7 @@ public class AdminController {
 	@RequestMapping(value = "proprietario/cadastrar", method = RequestMethod.POST)
 	public String cadastrarProprietario(@ModelAttribute("proprietario") Proprietario proprietario, RedirectAttributes redirect) {
 		proprietarioService.cadastrar(proprietario);
-		redirect.addFlashAttribute("info", Constants.MSG_PROPRIETARIO_CADASTRADO_SUCESSO);
+		redirect.addFlashAttribute("info", Constants.MSG_PROPRIETARIO_CADASTRADO);
 		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
 	}
 	
@@ -49,6 +50,26 @@ public class AdminController {
 	public String visualizarProprietario(@PathVariable("id") Integer idProp, Model model) {
 		model.addAttribute("proprietario", proprietarioService.find(idProp));
 		return Constants.PAGE_DETALHE_PROPRIETARIO;
+	}
+	
+	@RequestMapping(value = "proprietario/editar/{id}", method = RequestMethod.GET)
+	public String editarProprietarioForm(@PathVariable("id") Integer idProp, Model model) {
+		model.addAttribute("proprietario", proprietarioService.find(idProp));
+		model.addAttribute("action", "editar");
+		return Constants.PAGE_CADASTRAR_PROPRIETARIO;
+	}
+	
+	@RequestMapping(value = "proprietario/editar", method = RequestMethod.POST)
+	public String editarProprietario(@ModelAttribute("proprietario") Proprietario proprietario, RedirectAttributes redirect) {
+		Proprietario prop = proprietarioService.find(proprietario.getId());
+		prop.setNome(proprietario.getNome());
+		prop.setTelefone(proprietario.getTelefone());
+		proprietarioService.atualizar(proprietario);
+		Usuario usuario = prop.getUsuario();
+		usuario.setEmail(proprietario.getUsuario().getEmail());
+		proprietarioService.atualizar(usuario);
+		redirect.addFlashAttribute("info", Constants.MSG_PROPRIETARIO_ATUALIZADO);
+		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
 	}
 	
 	@RequestMapping(value = "estabelecimento/cadastrar/{id}", method = RequestMethod.GET)
