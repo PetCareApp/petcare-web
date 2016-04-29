@@ -12,5 +12,7 @@ public interface ProprietarioService {
 	public void cadastrar(Proprietario proprietario);
 	
 	public Papel getPapel(String nome);
+	
+	public Proprietario find(Integer id);
 
 }

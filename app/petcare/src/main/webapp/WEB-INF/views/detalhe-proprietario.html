@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Petcare - Proprietários</title>
+	<title>Petcare - Proprietário</title>
 	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
@@ -34,21 +34,20 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong th:text="${info}"></strong>
 		</div>
-		<a th:href="@{/proprietario/cadastrar}" class="btn btn-success mg-b-20">Novo proprietário</a>
-	   	<table class="hover stripe">
+		<a th:href="@{/estabelecimento/cadastrar/} + ${proprietario.id}" class="btn btn-success mg-b-20">Novo estabelecimento</a>
+		<h5 th:text="${proprietario.nome} + ' (' + ${proprietario.usuario.email} + ')'"></h5>
+		<table class="hover stripe">
 			<thead>
 				<tr>
-					<th>Nome</th>
-					<th>Email</th>
-					<th>Telefone</th>
+					<th>Estabelecimento</th>
+					<th>CNPJ</th>
 				</tr>
 			</thead>
 	
 			<tbody>
-				<tr th:each="p : ${proprietarios}">
-					<td><a th:text="${p.nome}" th:href="@{/proprietario/detalhes/} + ${p.id}"></a></td>
-					<td th:text="${p.usuario.email}"></td>
-					<td th:text="${p.telefone}"></td>
+				<tr th:each="est : ${proprietario.estabelecimentos}">
+					<td th:text="${est.nome}"></td>
+					<td th:text="${est.cnpj}"></td>
 				</tr>
 			</tbody>
 		</table>

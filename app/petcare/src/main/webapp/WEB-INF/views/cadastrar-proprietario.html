@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Petcare - Novo Proprietário</title>
-<link th:href="@{/resources/css/materialize.min.css}" type="text/css"
-	rel="stylesheet" media="screen,projection" />
-<link th:href="@{/resources/css/style.css}" type="text/css"
-	rel="stylesheet" media="screen,projection" />
-<link
-	th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"
-	rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Petcare - Novo Proprietário</title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body class="light-green lighten-5">
+<body>
 	<header>
-		<nav class="green lighten-2">
-			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center"><img src="" alt="" /></a>
-				<ul id="nav-mobile" class="left hide-on-med-and-down">
-					<li><a th:href="@{/proprietario/listar}">Proprietarios</a></li>
-					<li><a th:href="@{/tipo-estabelecimento/cadastrar}">Tipos de Estabelecimentos</a></li>
-				</ul>
+		<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img id="img-logo" alt="Logo Petcare" th:src="@{/resources/images/pet-icon.png}"/>
+						Petcare
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a id="menu-estabelecimentos" th:href="@{/estabelecimento/listar}">Estabelecimentos</a></li>
+						<li><a id="menu-proprietarios" th:href="@{/proprietario/listar}">Proprietários</a></li>
+						<li><a id="menu-tipo-estabelecimentos" href="#">Tipos de Estabelecimentos</a></li>
+					</ul>
+				</div>
 			</div>
 		</nav>
 	</header>
 
 	<div class="container">
-		<div class="row">
-			<form th:object="${proprietario}" th:action="@{/proprietario/cadastrar}" action="#" method="POST" class="col s12">
-				<header>Novo Proprietario</header>
-				<h6><i class="material-icons">pets</i> Dados Pessoais</h6>
-
-				<div class="row">
-					<div class="input-field col s8">
-						<input th:field="*{nome}" id="nome" type="text" class="validate" />
-						<label for="nome">Nome</label>
-					</div>
-					<div class="input-field col s4">
-						<input th:field="*{telefone}" id="telefone" type="text" class="validate" />
-						<label for="telefone">Telefone</label>
-					</div>
+		<form th:object="${proprietario}" th:action="@{/proprietario/cadastrar}" action="#" method="POST" class="form-horizontal">
+			<h5><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Novo Proprietário</h5>
+			<div class="form-group col-sm-12">
+			  <label class="control-label" for="nome">Nome</label>
+			  <input th:field="*{nome}" class="form-control input-sm" id="nome" type="text"/>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-4">
+					<label for="email" class="control-label">Email</label>
+					<input th:field="*{usuario.email}" type="email" class="form-control input-sm" id="email"/>
 				</div>
-
-				<h6><i class="material-icons">account_box</i> Acesso</h6>
-				<div class="row">
-					<div class="input-field col s4">
-						<input th:field="*{usuario.email}" id="email" type="email" class="validate" />
-						<label for="email">Email</label>
-					</div>
-					<div class="input-field col s4">
-						<input th:field="*{usuario.password}" id="password" type="password" class="validate" />
-						<label for="password">Senha</label>
-					</div>
+				<div class="col-sm-4">
+					<label for="telefone" class="control-label">Telefone</label>
+					<input th:field="*{telefone}" type="text" class="form-control input-sm" id="telefone"/>
 				</div>
-				<div class="right">
-					<button class="btn waves-effect waves-light green lighten-1" type="submit" name="action">
-						Cadastrar <i class="material-icons right">send</i>
-					</button>
+				<div class="col-sm-4">
+					<label for="senha" class="control-label">Senha</label>
+					<input th:field="*{usuario.password}" type="password" class="form-control input-sm" id="senha"/>
 				</div>
-			</form>
-		</div>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-success right" type="submit">Cadastrar</button>
+			</div>
+		</form>
 	</div>
 
 	<script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
-	<script type="text/javascript" th:src="@{/resources/js/materialize.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
 	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
+	
+	<script type="text/javascript">
+		$("#menu-proprietarios").addClass('active');
+	</script>
 </body>
 </html>
