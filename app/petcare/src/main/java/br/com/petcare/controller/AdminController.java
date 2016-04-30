@@ -35,6 +35,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "proprietario/cadastrar", method = RequestMethod.POST)
 	public String cadastrarProprietario(@ModelAttribute("proprietario") Proprietario proprietario, RedirectAttributes redirect) {
+		proprietario.getUsuario().setHabilitado(true);
 		proprietarioService.cadastrar(proprietario);
 		redirect.addFlashAttribute("info", Constants.MSG_PROPRIETARIO_CADASTRADO);
 		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
@@ -64,11 +65,19 @@ public class AdminController {
 		Proprietario prop = proprietarioService.find(proprietario.getId());
 		prop.setNome(proprietario.getNome());
 		prop.setTelefone(proprietario.getTelefone());
-		proprietarioService.atualizar(proprietario);
-		Usuario usuario = prop.getUsuario();
-		usuario.setEmail(proprietario.getUsuario().getEmail());
-		proprietarioService.atualizar(usuario);
+		prop.getUsuario().setEmail(proprietario.getUsuario().getEmail());
+		proprietarioService.atualizar(prop);
 		redirect.addFlashAttribute("info", Constants.MSG_PROPRIETARIO_ATUALIZADO);
+		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
+	}
+	
+	@RequestMapping(value = "proprietario/{idUsuario}/{status}", method = RequestMethod.GET)
+	public String atualizarStatusProprietario(@PathVariable("idUsuario") Integer idUsuario, 
+			@PathVariable("status") boolean status, Model model, RedirectAttributes redirect) {
+		Usuario usuario = proprietarioService.findUsuario(idUsuario);
+		usuario.setHabilitado(status);
+		proprietarioService.atualizar(usuario);
+		redirect.addFlashAttribute("info", Constants.MSG_STATUS_PROPRIETARIO_ATUALIZADO);
 		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
 	}
 	

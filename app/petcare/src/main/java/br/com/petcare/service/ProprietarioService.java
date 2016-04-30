@@ -18,6 +18,8 @@ public interface ProprietarioService {
 	
 	public Proprietario find(Integer id);
 	
+	public Usuario findUsuario(Integer id);
+	
 	public void atualizar(Usuario usuario);
 
 }

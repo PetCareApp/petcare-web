@@ -36,6 +36,8 @@
 			<strong th:text="${info}"></strong>
 		</div>
 		<a th:href="@{/estabelecimento/cadastrar/} + ${proprietario.id}" class="btn btn-success mg-b-20">Novo estabelecimento</a>
+		<a th:if="${proprietario.usuario.habilitado}" th:href="@{/proprietario/} + ${proprietario.usuario.id} + '/' + @{false}" class="btn btn-danger mg-b-20">Desabilitar</a>
+		<a th:if="${!proprietario.usuario.habilitado}" th:href="@{/proprietario/} + ${proprietario.usuario.id} + '/' + @{true}" class="btn btn-primary mg-b-20">Habilitar</a>
 		<h5 th:text="${proprietario.nome} + ' (' + ${proprietario.usuario.email} + ')'"></h5>
 		<table class="hover stripe">
 			<thead>

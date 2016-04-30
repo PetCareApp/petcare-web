@@ -58,6 +58,11 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	public void atualizar(Usuario usuario) {
 		usuarioRepository.update(usuario);
 	}
+
+	@Override
+	public Usuario findUsuario(Integer id) {
+		return usuarioRepository.find(Usuario.class, id);
+	}
 	
 	
 

@@ -31,6 +31,8 @@ public class Constants {
 	
 	public static String MSG_PROPRIETARIO_ATUALIZADO = "Proprietário atualizado com sucesso";
 	
+	public static String MSG_STATUS_PROPRIETARIO_ATUALIZADO = "O status do proprietátio foi alterado com sucesso";
+	
 	public static String MSG_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Estabelecimento cadastrado com sucesso";
 	
 	public static String MSG_TIPO_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Tipo de estabelecimento cadastrado com sucesso";

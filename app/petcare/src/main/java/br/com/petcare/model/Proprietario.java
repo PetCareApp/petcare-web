@@ -25,16 +25,16 @@ public class Proprietario {
 	
 	private String telefone;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Usuario usuario;
 	
 	@ManyToMany
 	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
 	
-	@OneToMany(cascade = CascadeType.REMOVE)
+	@OneToMany
 	private List<Estabelecimento> estabelecimentos;
-
+	
 	public List<Estabelecimento> getEstabelecimentos() {
 		return estabelecimentos;
 	}
