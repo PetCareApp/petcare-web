@@ -1,7 +1,7 @@
 /* Geral */
 
 body {
-	background-color: #f1f8e9;
+	background-color: #e1e4dd;
 }
 
 .container {
@@ -82,78 +82,3 @@ nav {
 	margin-right: auto;
 	padding: 0;
 }
-
-/* Page Proprietários */
-
-
-
-/* #login-page {
-	width: 400px;  
-}
-
-.login-form-text {
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	font-size: 0.8rem;
-}
-
-#image-login {
-	max-width: 40%;
-}
-
-#login-error {
-	text-align: center;
-}
-
-#login-error label {
-	color: #db2d2d;
-}
-
-header {
-	border-bottom: 2px solid rgb(68, 117, 58);
-}
-
-.container {
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 40px;
-	margin-bottom: 40px;
-	background-color: #FFF;
-	padding: 20px;
-}
-
-.container header {
-	font-size: 20px;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	color: #44753A;
-	margin-bottom: 20px;
-}
-
-
-Cadastrar Petshop Page
-.nav-wrapper{
-	width: 80%;
-	margin: 0 auto;
-}
-
-.brand-logo img {
-	max-height: 64px;
-}
-
-h6 {
-	margin-top: 50px;
-}
-
-Tipo Estabelecimento
-.alert {
-	padding: 15px;
-}
-
-.alert p {
-	text-align: center;
-}
-
-.alert-success {
-	color: #4caf50;
-} */

@@ -1,6 +1,5 @@
 package br.com.petcare.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +18,7 @@ public class Estabelecimento {
 	
 	private String cnpj;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne
 	private Endereco endereco;
 	
 	@ManyToOne

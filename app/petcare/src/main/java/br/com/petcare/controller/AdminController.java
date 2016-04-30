@@ -65,10 +65,8 @@ public class AdminController {
 		Proprietario prop = proprietarioService.find(proprietario.getId());
 		prop.setNome(proprietario.getNome());
 		prop.setTelefone(proprietario.getTelefone());
-		Usuario usuario = prop.getUsuario();
-		usuario.setEmail(proprietario.getUsuario().getEmail());
-		proprietarioService.atualizar(usuario);
-		proprietarioService.atualizar(proprietario);
+		prop.getUsuario().setEmail(proprietario.getUsuario().getEmail());
+		proprietarioService.atualizar(prop);
 		redirect.addFlashAttribute("info", Constants.MSG_PROPRIETARIO_ATUALIZADO);
 		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
 	}

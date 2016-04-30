@@ -25,7 +25,7 @@ public class Proprietario {
 	
 	private String telefone;
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Usuario usuario;
 	
 	@ManyToMany
