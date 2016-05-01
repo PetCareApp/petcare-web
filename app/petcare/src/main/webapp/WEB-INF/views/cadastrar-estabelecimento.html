@@ -3,32 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Petcare - Novo Estabelecimento</title>
-	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{/resources/css/font-awesome.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<th:block th:include="fragments/head :: head"></th:block>
 </head>
 <body>
-	<header>
-		<nav class="navbar navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">
-						<img id="img-logo" alt="Logo Petcare" th:src="@{/resources/images/pet-icon.png}"/>
-						Petcare
-					</a>
-				</div>
-
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li><a id="menu-estabelecimentos" th:href="@{/estabelecimento/listar}">Estabelecimentos</a></li>
-						<li><a id="menu-proprietarios" th:href="@{/proprietario/listar}">Proprietários</a></li>
-						<li><a id="menu-tipo-estabelecimentos" href="#">Tipos de Estabelecimentos</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+	<th:block th:include="fragments/header :: header"></th:block>
 
 	<div class="container">
 		<form th:object="${estabelecimento}" th:action="@{/estabelecimento/cadastrar}" action="#" method="POST" class="form-horizontal">
@@ -86,10 +64,7 @@
 		</form>
 	</div>
 
-	<script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
-	<script type="text/javascript" th:src="@{/resources/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
-	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
+	<th:block th:include="fragments/footer :: footer"></th:block>
 	
 	<script type="text/javascript">
 		$("#menu-proprietarios").addClass('active');

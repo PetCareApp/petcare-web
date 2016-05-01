@@ -14,7 +14,7 @@ public class LoginController {
 	
 	@RequestMapping(value = { "/"}, method = RequestMethod.GET)
 	public String index() {
-		return Constants.REDIRECT_CADASTRAR_PROPRIETARIO;
+		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

@@ -101,18 +101,17 @@ public class AdminController {
 		return Constants.PAGE_LISTAR_ESTABELECIMENTO;
 	}
 	
-	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.GET)
+	@RequestMapping(value = "tipo-estabelecimento", method = RequestMethod.GET)
 	public String cadastrarTipoEstabelecimentoForm(Model model) {
 		model.addAttribute("tipo", new TipoEstabelecimento());
 		model.addAttribute("tipos", estabelecimentoService.getAllTipoEstabelecimento());
-		return Constants.PAGE_CADASTRAR_TIPO_ESTABELECIMENTO;
+		return Constants.PAGE_TIPO_ESTABELECIMENTO;
 	}
 	
-	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.POST)
+	@RequestMapping(value = "tipo-estabelecimento", method = RequestMethod.POST)
 	public String cadastrarTipoEstabelecimento(@ModelAttribute("tipo") TipoEstabelecimento tipo, 
 			final RedirectAttributes redirectAttributes) {
 		estabelecimentoService.cadastrar(tipo);
-		redirectAttributes.addFlashAttribute("info", Constants.MSG_TIPO_ESTABELECIMENTO_CADASTRADO_SUCESSO);
 		return Constants.REDIRECT_CADASTRAR_TIPO_ESTABELECIMENTO;
 	}
 

@@ -82,3 +82,31 @@ nav {
 	margin-right: auto;
 	padding: 0;
 }
+
+
+/** Tipos de Estabelecimentos **/
+
+.chip {
+    display: inline-block;
+    padding: 0 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #4caf50;
+    color: #FFF;
+    margin-top: 30px;
+}
+
+.closebtn {
+    padding-left: 10px;
+    color: #FFF;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.closebtn:hover {
+    color: #000;
+}
