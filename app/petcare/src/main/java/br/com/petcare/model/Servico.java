@@ -6,12 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Estabelecimento {
+public class Servico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,44 +17,13 @@ public class Estabelecimento {
 	
 	private String nome;
 	
-	private String cnpj;
+	private String descricao;
 	
-	@OneToOne
-	private Endereco endereco;
+	private String categoria;
 	
-	@ManyToOne
-	private Proprietario proprietario;
-	
-	@ManyToOne
-	private TipoEstabelecimento tipo;
-	
-	@OneToMany (mappedBy = "estabelecimento")
+	@OneToMany (mappedBy = "servico")
 	private List<EstabelecimentoServico> estabelecimentoServicos;
 	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public Proprietario getProprietario() {
-		return proprietario;
-	}
-
-	public void setProprietario(Proprietario proprietario) {
-		this.proprietario = proprietario;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -65,20 +32,24 @@ public class Estabelecimento {
 		this.nome = nome;
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public TipoEstabelecimento getTipo() {
-		return tipo;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setTipo(TipoEstabelecimento tipo) {
-		this.tipo = tipo;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	@Override
@@ -97,7 +68,7 @@ public class Estabelecimento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estabelecimento other = (Estabelecimento) obj;
+		Servico other = (Servico) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

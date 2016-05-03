@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petcare - Serviços</title>
+	<link th:href="@{/resources/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
+</head>
+<body class="light-green lighten-5">
+	<header>
+	  <nav class="green lighten-2">
+	    <div class="nav-wrapper">
+	      <a href="#" class="brand-logo center"><img src="" alt=""/></a>
+	      <ul id="nav-mobile" class="left hide-on-med-and-down">
+	        <li><a th:href="@{/servico/cadastrar}">Cadastrar Serviços</a></li>
+	        <li><a th:href="@{/estabelecimento/cadastrar}">Cadastrar Estabelecimentos</a></li>
+	      </ul>
+	    </div>
+	  </nav>
+	</header>
+	
+	<div class="container">
+       <div class="row">
+		    	<header>Serviços 
+		    		<a th:href="@{/servico/cadastrar}" class="btn-floating btn-medium waves-effect waves-light">
+		    			<i class="material-icons">add</i>
+		    		</a>
+		    	</header>
+				<div class="alert alert-success" th:if="${info != null}">
+					<p th:text="${info}" ></p>
+				</div>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Categoria</th>
+							<th>Descrição</th>
+						</tr>
+					</thead>
+	
+					<tbody>
+						<tr th:each="s : ${servicos}">
+							<td th:text="${s.nome}"></td>
+							<td th:text="${s.categoria}"></td>
+							<td th:text="${s.descricao}"></td>
+<!-- 							<td><button class="btn waves-effect waves-light red lighten-1" style="width: 10px;">X</button></td> -->
+						</tr>
+					</tbody>
+				</table>
+		  </div>
+    </div>
+    
+    <script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/materialize.min.js}"></script>
+</body>
+</html>
