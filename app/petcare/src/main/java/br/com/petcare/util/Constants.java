@@ -12,6 +12,8 @@ public class Constants {
 	
 	public static String PAGE_LISTAR_ESTABELECIMENTO = "listar-estabelecimento";
 	
+	public static String PAGE_LISTAR_ESTABELECIMENTO = "listar-estabelecimento";
+	
 	public static String PAGE_CADASTRAR_TIPO_ESTABELECIMENTO = "tipo-estabelecimento";
 	
 	public static String PAGE_CADASTRAR_SERVICO = "cadastrar-servico";

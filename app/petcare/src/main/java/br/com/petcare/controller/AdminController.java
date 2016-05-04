@@ -101,6 +101,12 @@ public class AdminController {
 		return Constants.PAGE_LISTAR_ESTABELECIMENTO;
 	}
 	
+	@RequestMapping(value = "estabelecimento/listar", method = RequestMethod.GET)
+	public String listarEstabelecimentos(Model model) {
+		model.addAttribute("estabelecimentos", estabelecimentoService.getAll());
+		return Constants.PAGE_LISTAR_ESTABELECIMENTO;
+	}
+	
 	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.GET)
 	public String cadastrarTipoEstabelecimentoForm(Model model) {
 		model.addAttribute("tipo", new TipoEstabelecimento());

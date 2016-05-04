@@ -15,6 +15,8 @@ public class Usuario {
 	private String email;
 	
 	private String password;
+	
+	private boolean habilitado;
 
 	public Integer getId() {
 		return id;
@@ -38,6 +40,14 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 	@Override
