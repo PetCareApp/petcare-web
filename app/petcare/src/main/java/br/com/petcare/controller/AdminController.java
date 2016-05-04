@@ -12,10 +12,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.petcare.model.Estabelecimento;
 import br.com.petcare.model.Proprietario;
+import br.com.petcare.model.Servico;
 import br.com.petcare.model.TipoEstabelecimento;
 import br.com.petcare.model.Usuario;
 import br.com.petcare.service.EstabelecimentoService;
 import br.com.petcare.service.ProprietarioService;
+import br.com.petcare.service.ServicoService;
 import br.com.petcare.util.Constants;
 
 @Controller
@@ -26,6 +28,9 @@ public class AdminController {
 	
 	@Inject
 	private ProprietarioService proprietarioService;
+	
+	@Inject
+	private ServicoService servicoService;
 	
 	@RequestMapping(value = "proprietario/cadastrar", method = RequestMethod.GET)
 	public String cadastrarProprietarioForm(Model model) {
@@ -101,12 +106,6 @@ public class AdminController {
 		return Constants.PAGE_LISTAR_ESTABELECIMENTO;
 	}
 	
-	@RequestMapping(value = "estabelecimento/listar", method = RequestMethod.GET)
-	public String listarEstabelecimentos(Model model) {
-		model.addAttribute("estabelecimentos", estabelecimentoService.getAll());
-		return Constants.PAGE_LISTAR_ESTABELECIMENTO;
-	}
-	
 	@RequestMapping(value = "tipo-estabelecimento/cadastrar", method = RequestMethod.GET)
 	public String cadastrarTipoEstabelecimentoForm(Model model) {
 		model.addAttribute("tipo", new TipoEstabelecimento());
@@ -121,7 +120,7 @@ public class AdminController {
 		redirectAttributes.addFlashAttribute("info", Constants.MSG_TIPO_ESTABELECIMENTO_CADASTRADO_SUCESSO);
 		return Constants.REDIRECT_CADASTRAR_TIPO_ESTABELECIMENTO;
 	}
-	
+
 	@RequestMapping(value = "servico/cadastrar", method = RequestMethod.GET)
 	public String cadastrarServicoForm(Model model) {
 		model.addAttribute("servico", new Servico());
