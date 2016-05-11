@@ -1,5 +1,9 @@
 $(document).ready(function() {
-    $('select').material_select();
-    
-    $('table').DataTable();
+	
+	$("table").dataTable( {
+        "language": {
+            "url": "/petcare/resources/js/Portuguese-Brasil.json"
+        }
+    } );
+	
 });

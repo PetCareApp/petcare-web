@@ -35,4 +35,9 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 		return tipoEstRepo.find(TipoEstabelecimento.class);
 	}
 
+	@Override
+	public List<Estabelecimento> getAll() {
+		return estabelecimentoRepo.find(Estabelecimento.class);
+	}
+
 }

@@ -3,49 +3,37 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>Petcare - Login</title>
-	<link th:href="@{/resources/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
+	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/font-awesome.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/login.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body class="green lighten-4">
-	<div id="login-page" class="row">
-		<div class="col s12 z-depth-4 card-panel">
-	      <form class="login-form" th:action="@{j_spring_security_check}" method="POST">
-	        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	        <div class="row">
-	          <div class="input-field s12 center">
-	            <img id="image-login" th:src="@{/resources/images/pet-icon.png}" alt="Logo Petcare"/>
-	            <p class="center login-form-text">PetCare Administração</p>
-	          </div>
-	        </div>
-	        <div id="login-error" class="row" th:if="${erro}">
-	        	<label th:text="${erro }"></label>
-	        </div>
-	        <div class="row margin">
-	          <div class="input-field col s12">
-	            <i class="material-icons prefix">perm_identity</i>
-	            <input id="username" type="text" name="username" required="required"/>
-	            <label for="username" class="center-align">Usuário</label>
-	          </div>
-	        </div>
-	        <div class="row margin">
-	          <div class="input-field col s12">
-	            <i class="material-icons prefix">vpn_key</i>
-	            <input id="password" type="password" name="password" required="required"/>
-	            <label for="password">Senha</label>
-	          </div>
-	        </div>
-	        <div class="row">
-	          <div class="input-field col s12">
-	            <input type="submit" value="Login" class="btn waves-effect waves-light col s12"/>
-	          </div>
-	        </div>
+<body>
+	<div class="login-container">
+		<div class="login-header">
+			<img th:src="@{/resources/images/pet-icon.png}" alt="Logo Petcare"/>
+			<p>Petcare Administração</p>
+		</div>
+		<div class="login-form">
+			<form th:action="@{j_spring_security_check}" method="POST">
+		        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		        <div class="form-group has-error" th:if="${erro}">
+		        	<label class="control-label" th:text="${erro }"></label>
+		        </div>
+		        <div class="form-group">
+	            	<input class="form-control" id="username" type="text" name="username" required="required" placeholder="email"/>
+		        </div>
+		        <div class="form-group">
+		            <input class="form-control" id="password" type="password" name="password" required="required" placeholder="senha" />
+		        </div>
+		        <div class="form-group">
+		            <input type="submit" value="Entrar" class="btn btn-default"/>
+		        </div>
 	      </form>
-	    </div>
+		</div>
 	</div>
 
 	<script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
-	<script type="text/javascript" th:src="@{/resources/js/materialize.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/bootstrap.min.js}"></script>
 </body>
 	
 </html>

@@ -12,5 +12,7 @@ public interface EstabelecimentoService {
 	public void cadastrar(TipoEstabelecimento tipoEstabelecimento);
 	
 	public List<TipoEstabelecimento> getAllTipoEstabelecimento();
+	
+	public List<Estabelecimento> getAll();
 
 }
