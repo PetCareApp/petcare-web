@@ -124,20 +124,49 @@ public class AdminController {
 	@RequestMapping(value = "servico/cadastrar", method = RequestMethod.GET)
 	public String cadastrarServicoForm(Model model) {
 		model.addAttribute("servico", new Servico());
-		model.addAttribute("tipos", servicoService.getAll());
+		model.addAttribute("categorias", servicoService.getAllServicoCategorias());
+		model.addAttribute("estabelecimentos", estabelecimentoService.getAll());
 		return Constants.PAGE_CADASTRAR_SERVICO;
 	}
 
 	@RequestMapping(value = "servico/cadastrar", method = RequestMethod.POST)
-	public String cadastrarServico(@ModelAttribute("servico") Servico servico) {
+	public String cadastrarServico(@ModelAttribute("servico") Servico servico, RedirectAttributes redirect) {
 		servicoService.cadastrar(servico);
+		redirect.addFlashAttribute("info", Constants.MSG_SERVICO_CADASTRADO_SUCESSO);
 		return Constants.REDIRECT_CADASTRAR_SERVICO;
 	}
 	
 	@RequestMapping(value = "servico/listar", method = RequestMethod.GET)
 	public String listarServico(Model model) {
-		model.addAttribute("servicos", servicoService.getAll());
+		model.addAttribute("servicos", servicoService.getAllServicos());
 		return Constants.PAGE_LISTAR_SERVICO;
+	}
+	
+	@RequestMapping(value = "servico/editar/{id}", method = RequestMethod.GET)
+	public String editarServicoForm(@PathVariable("id") Integer idProp, Model model) {
+		model.addAttribute("servico", servicoService.find(idProp));
+		model.addAttribute("action", "editar");
+		model.addAttribute("categorias", servicoService.getAllServicoCategorias());
+		return Constants.PAGE_EDITAR_SERVICO;
+	}
+	
+	@RequestMapping(value = "servico/editar", method = RequestMethod.POST)
+	public String editarServico(@ModelAttribute("servico") Servico servico, RedirectAttributes redirect) {
+		Servico s = servicoService.find(servico.getId());
+		s.setNome(servico.getNome());
+		s.setDescricao(servico.getDescricao());
+		s.setCategoria(servico.getCategoria());
+		servicoService.atualizar(s);
+		redirect.addFlashAttribute("info", Constants.MSG_SERVICO_ATUALIZADO);
+		return Constants.REDIRECT_LISTAR_SERVICO;
+	}
+	
+	@RequestMapping(value = "servico/excluir/{id}", method = RequestMethod.GET)
+	public String excluirServico(@PathVariable("id") Integer idProp, RedirectAttributes redirect) {
+		Servico servico = servicoService.find(idProp);
+		servicoService.deletar(servico);
+		redirect.addFlashAttribute("info", Constants.MSG_SERVICO_DELETADO);
+		return Constants.REDIRECT_LISTAR_SERVICO;
 	}
 	
 }

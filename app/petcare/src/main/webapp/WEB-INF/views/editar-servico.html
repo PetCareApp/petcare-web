@@ -31,33 +31,27 @@
 	</header>
 
 	<div class="container">
-		<form th:object="${servico}" th:action="@{/servico/cadastrar}" action="#" method="POST" class="form-horizontal">
+		<form th:object="${servico}" th:action="@{/servico/editar}" action="#" method="POST" class="form-horizontal">
 			<input th:field="*{id}" type="hidden"/>
 			<div class="form-group">
 				<div class="col-sm-4">
 					<label for="nome" class="control-label">Nome</label>
-					<input th:field="*{nome}" type="text" class="form-control input-sm" id="nome"/>
+					<input th:field="*{nome}" type="text" value="*{nome}" class="form-control input-sm" id="nome"/>
 				</div>
 				<div class="col-sm-4">
 					<label for="categoria" class="control-label">Categoria</label>
-					<select id="categoria" th:field="*{categoria.id}" class="form-control input-sm">
-						<option th:each="c : ${categorias}" th:text="${c.nome}" th:value="${c.id}"></option>
-					</select>
-				</div>
-				<div class="col-sm-4">
-					<label for="estabelecimento" class="control-label">Estabelecimento</label>
-					<select id="estabelecimento" th:field="*{estabelecimento.id}" class="form-control input-sm">
-						<option th:each="e : ${estabelecimentos}" th:text="${e.nome}" th:value="${e.id}"></option>
+					<select id="categoria" th:field="${servico.categoria.id}"  class="form-control input-sm">
+						<option th:each="c : ${categorias}" selected="selected" th:text="${c.nome}" th:value="${c.id}"></option>
 					</select>
 				</div>
 				<div class="col-sm-12">
 					<label for="nome" class="control-label">Descrição</label>
-					<input th:field="*{descricao}" type="text" class="form-control input-sm" id="nome"/>
+					<input th:field="*{descricao}" value="*{descricao}" th:type="text" class="form-control input-sm" id="nome"/>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<button class="btn btn-success right" type="submit">Cadastrar</button>
+				<button class="btn btn-success right" type="submit">Atualizar</button>
 			</div>
 		</form>
 	</div>

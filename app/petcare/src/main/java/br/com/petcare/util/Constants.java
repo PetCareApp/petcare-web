@@ -18,6 +18,8 @@ public class Constants {
 	
 	public static String PAGE_LISTAR_SERVICO = "listar-servico";
 	
+	public static String PAGE_EDITAR_SERVICO = "editar-servico";
+	
 	public static String REDIRECT_CADASTRAR_PROPRIETARIO = "redirect:/proprietario/cadastrar";
 	
 	public static String REDIRECT_LISTAR_PROPRIETARIO = "redirect:/proprietario/listar";
@@ -46,5 +48,9 @@ public class Constants {
 	public static String MSG_TIPO_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Tipo de estabelecimento cadastrado com sucesso";
 	
 	public static String MSG_SERVICO_CADASTRADO_SUCESSO = "Serviço cadastrado com sucesso";
+	
+	public static String MSG_SERVICO_ATUALIZADO = "Serviço atualizado com sucesso";
+	
+	public static String MSG_SERVICO_DELETADO = "Serviço deletado com sucesso";
 
 }

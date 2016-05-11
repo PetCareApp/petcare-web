@@ -7,12 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Estabelecimento {
+public class ServicoCategoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,50 +18,15 @@ public class Estabelecimento {
 	
 	private String nome;
 	
-	private String cnpj;
-	
-	@OneToOne
-	private Endereco endereco;
-	
-	@ManyToOne
-	private Proprietario proprietario;
-	
-	@ManyToOne
-	private TipoEstabelecimento tipo;
-
-	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
 	private List<Servico> servicos;
 	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
 	public List<Servico> getServicos() {
 		return servicos;
 	}
 
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
-	}
-
-	public Proprietario getProprietario() {
-		return proprietario;
-	}
-
-	public void setProprietario(Proprietario proprietario) {
-		this.proprietario = proprietario;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -74,20 +37,12 @@ public class Estabelecimento {
 		this.nome = nome;
 	}
 
-	public String getCnpj() {
-		return cnpj;
+	public Integer getId() {
+		return id;
 	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public TipoEstabelecimento getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoEstabelecimento tipo) {
-		this.tipo = tipo;
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
@@ -106,7 +61,7 @@ public class Estabelecimento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Estabelecimento other = (Estabelecimento) obj;
+		ServicoCategoria other = (ServicoCategoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

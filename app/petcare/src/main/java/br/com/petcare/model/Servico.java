@@ -1,12 +1,10 @@
 package br.com.petcare.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Servico {
@@ -19,10 +17,11 @@ public class Servico {
 	
 	private String descricao;
 	
-	private String categoria;
+	@ManyToOne
+	private Estabelecimento estabelecimento;
 	
-	@OneToMany (mappedBy = "servico")
-	private List<EstabelecimentoServico> estabelecimentoServicos;
+	@ManyToOne
+	private ServicoCategoria categoria;
 	
 	public String getNome() {
 		return nome;
@@ -36,20 +35,32 @@ public class Servico {
 		return descricao;
 	}
 
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public String getCategoria() {
+	public ServicoCategoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(ServicoCategoria categoria) {
 		this.categoria = categoria;
 	}
 
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
