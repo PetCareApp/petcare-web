@@ -40,4 +40,19 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 		return estabelecimentoRepo.find(Estabelecimento.class);
 	}
 
+	@Override
+	public TipoEstabelecimento getTipoById(Integer id) {
+		return tipoEstRepo.find(TipoEstabelecimento.class, id);
+	}
+
+	@Override
+	public Estabelecimento getEstabelecimento(Integer id) {
+		return estabelecimentoRepo.find(Estabelecimento.class, id);
+	}
+
+	@Override
+	public void atualizar(Estabelecimento estabelecimento) {
+		estabelecimentoRepo.update(estabelecimento);
+	}
+
 }

@@ -1,9 +1,15 @@
 package br.com.petcare.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -18,14 +24,16 @@ public class Estabelecimento {
 	
 	private String cnpj;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
 	private Endereco endereco;
 	
 	@ManyToOne
 	private Proprietario proprietario;
 	
-	@ManyToOne
-	private TipoEstabelecimento tipo;
+	@ManyToMany (fetch = FetchType.EAGER)
+	private List<TipoEstabelecimento> tipos;
+	
+	private boolean habilitado;
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -67,12 +75,33 @@ public class Estabelecimento {
 		this.cnpj = cnpj;
 	}
 
-	public TipoEstabelecimento getTipo() {
-		return tipo;
+	public List<TipoEstabelecimento> getTipos() {
+		return tipos;
+	}
+	
+	public void setTipos(List<TipoEstabelecimento> tipos) {
+		this.tipos = tipos;
 	}
 
-	public void setTipo(TipoEstabelecimento tipo) {
-		this.tipo = tipo;
+	public void addTipo(TipoEstabelecimento tipo) {
+		if (tipos == null) {
+			tipos = new ArrayList<TipoEstabelecimento>();
+		}
+		if (!tipos.contains(tipo)) {
+			this.tipos.add(tipo);
+		}
+	}
+	
+	public void removeTipo(TipoEstabelecimento tipo) {
+		this.tipos.remove(tipo);
+	}
+
+	public boolean isHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
 	}
 
 	@Override

@@ -13,6 +13,12 @@ public interface EstabelecimentoService {
 	
 	public List<TipoEstabelecimento> getAllTipoEstabelecimento();
 	
+	public TipoEstabelecimento getTipoById(Integer id);
+	
 	public List<Estabelecimento> getAll();
+	
+	public Estabelecimento getEstabelecimento(Integer id);
+	
+	public void atualizar(Estabelecimento estabelecimento);
 
 }

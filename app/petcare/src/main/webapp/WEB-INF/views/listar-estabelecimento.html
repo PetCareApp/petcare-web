@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<title>Petcare - Proprietário</title>
+	<title>Petcare - Estabelcimentos</title>
 	<th:block th:include="fragments/head :: head"></th:block>
 </head>
 <body>
@@ -13,27 +13,13 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong th:text="${info}"></strong>
 		</div>
-		
-		<div>
-			<h5 th:text="${proprietario.nome} + ' (' + ${proprietario.usuario.email} + ')'"></h5>
-			<a th:if="${proprietario.usuario.habilitado}" th:href="@{/estabelecimento/cadastrar/} + ${proprietario.id}" class="btn btn-success mg-b-20">
-				<i class="fa fa-paw" aria-hidden="true"></i> Novo estabelecimento
-			</a>
-			<a th:if="${proprietario.usuario.habilitado}" th:href="@{/proprietario/} + ${proprietario.usuario.id} + '/' + @{false}" class="btn btn-danger mg-b-20">
-				<i class="fa fa-ban" aria-hidden="true"></i> Desabilitar</a>
-			<a th:if="${!proprietario.usuario.habilitado}" th:href="@{/proprietario/} + ${proprietario.usuario.id} + '/' + @{true}" class="btn btn-primary mg-b-20">
-				<i class="fa fa-check-square-o" aria-hidden="true"></i> Habilitar
-			</a>
-			<a th:if="${proprietario.usuario.habilitado}" th:href="@{/proprietario/editar/} + ${proprietario.id}" class="btn btn-default mg-b-20" title="Editar">
-				<i class="fa fa-pencil-square-o" aria-hidden="true"> Atualizar</i>
-			</a>
-		</div>
-		<!-- <label th:text="${proprietario.estabelecimentos.size}"></label> -->
+		<h5><span class="fa fa-home fa-2x" aria-hidden="true"></span> Estabelecimentos</h5>
 		<table class="hover stripe">
 			<thead>
 				<tr>
 					<th>Estabelecimento</th>
 					<th>CNPJ</th>
+					<th>Proprietário</th>
 					<th>Telefone</th>
 					<th>Tipo</th>
 					<th>Status</th>
@@ -41,9 +27,10 @@
 			</thead>
 	
 			<tbody>
-				<tr th:each="est : ${proprietario.estabelecimentos}">
+				<tr th:each="est : ${estabelecimentos}">
 					<td><a th:text="${est.nome}" th:href="@{/estabelecimento/detalhes/} + ${est.id}"></a></td>
 					<td th:text="${est.cnpj}"></td>
+					<td th:text="${est.proprietario.nome}"></td>
 					<td th:text="${est.endereco.telefone}"></td>
 					<td>
 						<span th:each="tipo : ${est.tipos}" th:text="${tipo.nome}" class="label label-success"></span>
@@ -62,7 +49,7 @@
     <th:block th:include="fragments/footer :: footer"></th:block>
 	
 	<script type="text/javascript">
-		$("#menu-proprietarios").addClass('active');
+		$("#menu-estabelecimentos").addClass('active');
 	</script>
 </body>
 </html>

@@ -20,7 +20,6 @@
 					<th>Email</th>
 					<th>Telefone</th>
 					<th>Status</th>
-					<th></th>
 				</tr>
 			</thead>
 	
@@ -34,11 +33,6 @@
 					</td>
 					<td th:if="${!p.usuario.habilitado}">
 						<span class="label label-danger">desabilitado</span>
-					</td>
-					<td>
-						<a th:href="@{/proprietario/editar/} + ${p.id}" class="btn btn-default btn-sm" title="Editar">
-							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-						</a>
 					</td>
 				</tr>
 			</tbody>

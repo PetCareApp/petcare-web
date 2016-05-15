@@ -8,6 +8,8 @@ public class Constants {
 	
 	public static String PAGE_DETALHE_PROPRIETARIO = "detalhe-proprietario";
 	
+	public static String PAGE_DETALHE_ESTABELECIMENTO = "detalhe-estabelecimento";
+	
 	public static String PAGE_CADASTRAR_ESTABELECIMENTO = "cadastrar-estabelecimento";
 	
 	public static String PAGE_LISTAR_ESTABELECIMENTO = "listar-estabelecimento";
@@ -22,6 +24,8 @@ public class Constants {
 	
 	public static String REDIRECT_CADASTRAR_TIPO_ESTABELECIMENTO = "redirect:/tipo-estabelecimento";
 	
+	public static String REDIRECT_DETALHE_PROPRIETARIO = "redirect:/proprietario/detalhes/";
+	
 	public static String PAPEL_PROPRIETARIO = "PROPRIETARIO";
 	
 	
@@ -31,7 +35,11 @@ public class Constants {
 	
 	public static String MSG_PROPRIETARIO_ATUALIZADO = "Proprietário atualizado com sucesso";
 	
+	public static String MSG_ESTABELECIMENTO_ATUALIZADO = "Estabelecimento atualizado com sucesso";
+	
 	public static String MSG_STATUS_PROPRIETARIO_ATUALIZADO = "O status do proprietátio foi alterado com sucesso";
+	
+	public static String MSG_STATUS_ESTABELECIMENTO_ATUALIZADO = "O status do estabelecimento foi alterado com sucesso";
 	
 	public static String MSG_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Estabelecimento cadastrado com sucesso";
 	

@@ -32,26 +32,11 @@ public class Proprietario {
 	@JoinTable(name = "papel_usuario", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "papel_id"))
 	private List<Papel> papeis;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "proprietario")
 	private List<Estabelecimento> estabelecimentos;
 	
 	public List<Estabelecimento> getEstabelecimentos() {
 		return estabelecimentos;
-	}
-	
-	public void addEstabelecimento(Estabelecimento estabelecimento) {
-		if (this.estabelecimentos == null) {
-			this.estabelecimentos = new ArrayList<Estabelecimento>();
-		}
-		if (!this.estabelecimentos.contains(estabelecimento)) {
-			this.estabelecimentos.add(estabelecimento);
-		}
-	}
-	
-	public void removeEstabelecimento(Estabelecimento estabelecimento) {
-		if (this.estabelecimentos != null) {
-			this.estabelecimentos.remove(estabelecimento);
-		}
 	}
 
 	public Integer getId() {

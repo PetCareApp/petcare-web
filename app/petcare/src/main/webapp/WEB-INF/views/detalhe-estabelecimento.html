@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petcare - Estabelecimento</title>
+	<th:block th:include="fragments/head :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/header :: header"></th:block>
+	
+	<div class="container">
+		<div th:if="${info != null}" class="alert alert-dismissible alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong th:text="${info}"></strong>
+		</div>
+		
+		<div>
+			<h5 th:text="${estabelecimento.nome} + ' (' + ${estabelecimento.proprietario.nome} + ')'"></h5>
+			<a th:if="${estabelecimento.habilitado}" th:href="@{/estabelecimento/} + ${estabelecimento.id} + '/' + @{false}" class="btn btn-danger mg-b-20" title="Habilitar">
+				<i class="fa fa-ban" aria-hidden="true"></i> Desabilitar</a>
+			<a th:if="${!estabelecimento.habilitado}" th:href="@{/estabelecimento/} + ${estabelecimento.id} + '/' + @{true}" class="btn btn-primary mg-b-20" title="Desabilitar" >
+				<i class="fa fa-check-square-o" aria-hidden="true"></i> Habilitar
+			</a>
+			<a th:if="${estabelecimento.habilitado}" th:href="@{/estabelecimento/editar/} + ${estabelecimento.id}" class="btn btn-default mg-b-20" title="Editar">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"> Atualizar</i>
+			</a>
+		</div>
+		
+    </div>
+    
+    <th:block th:include="fragments/footer :: footer"></th:block>
+	
+	<script type="text/javascript">
+		$("#menu-proprietarios").addClass('active');
+	</script>
+</body>
+</html>
