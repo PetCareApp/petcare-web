@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,8 +31,9 @@ public class Estabelecimento {
 	@ManyToOne
 	private Proprietario proprietario;
 	
-	@ManyToOne
-	private TipoEstabelecimento tipo;
+	@ManyToMany
+	@JoinTable(name = "estabelecimento_tipo", joinColumns = @JoinColumn(name = "estabelecimento_id"), inverseJoinColumns = @JoinColumn(name = "tipo_id"))
+	private List<TipoEstabelecimento> tipos;
 
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
 	private List<Servico> servicos;
@@ -82,12 +86,12 @@ public class Estabelecimento {
 		this.cnpj = cnpj;
 	}
 
-	public TipoEstabelecimento getTipo() {
-		return tipo;
+	public List<TipoEstabelecimento> getTipos() {
+		return tipos;
 	}
 
-	public void setTipo(TipoEstabelecimento tipo) {
-		this.tipo = tipo;
+	public void setTipos(List<TipoEstabelecimento> tipo) {
+		this.tipos = tipo;
 	}
 
 	@Override

@@ -1,13 +1,9 @@
 package br.cap7.petcare.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class ServicoCategoria {
@@ -17,17 +13,6 @@ public class ServicoCategoria {
 	private Integer id;
 	
 	private String nome;
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-	private List<Servico> servicos;
-	
-	public List<Servico> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
-	}
 
 	public String getNome() {
 		return nome;

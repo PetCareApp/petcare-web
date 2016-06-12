@@ -33,7 +33,7 @@ public class Endereco {
 	private String latitude;
 	
 	private String longitude;
-
+	
 	public Integer getId() {
 		return id;
 	}
