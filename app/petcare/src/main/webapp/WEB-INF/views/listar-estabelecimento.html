@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petcare - Estabelecimentos</title>
+	<link th:href="@{/resources/css/bootstrap.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/font-awesome.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link th:href="@{/resources/css/style.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img id="img-logo" alt="Logo Petcare" th:src="@{/resources/images/pet-icon.png}"/>
+						Petcare
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a id="menu-proprietarios" th:href="@{/proprietario/listar}">Proprietários</a></li>
+						<li><a id="menu-tipo-estabelecimentos" href="#">Tipos de Estabelecimentos</a></li>
+						<li><a id="menu-servicos" th:href="@{/servico/listar}">Serviços</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+	<div class="container">
+		<div th:if="${info != null}" class="alert alert-dismissible alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong th:text="${info}"></strong>
+		</div>
+		<a th:href="@{/estabelecimento/cadastrar}" class="btn btn-success mg-b-20">Novo Estabelecimento</a>
+	   	<table class="hover stripe">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>CNPJ</th>
+					<th>Site</th>
+					<th>Endereço</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+	
+			<tbody>
+				<tr th:each="es : ${estabelecimentos}">
+					<td th:text="${es.nome}"></td>
+					<td th:text="${es.cnpj}"></td>
+					<td th:text="${es.site}"></td>
+					<td th:text="${es.endereco.cidade} + ${es.endereco.bairro} + ${es.endereco.rua} + ${es.endereco.numero}"></td>
+					<td>
+						<a th:href="@{/estabelecimento/editar/} + ${es.id}" class="btn btn-default btn-sm" title="Editar">
+							<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</a>
+					</td>
+					<td>
+						<a th:href="@{/estabelecimento/excluir/} + ${es.id}" class="btn btn-default btn-sm" title="Excluir">
+							<i class="fa fa-times-circle" aria-hidden="true"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+    
+    <script type="text/javascript" th:src="@{/resources/js/jquery-1.12.3.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
+	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
+	
+</body>
+</html>

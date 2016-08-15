@@ -64,6 +64,12 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		return usuarioRepository.find(Usuario.class, id);
 	}
 	
-	
+	@Override
+	public Usuario findUsuario(String email, String password) {
+		Map<String, Object> namedParams = new HashMap<String, Object>();
+		namedParams.put("email", email);
+		namedParams.put("password", password);
+		return usuarioRepository.findFirst("FROM Usuario WHERE email = :email AND password = :password", namedParams);
+	}
 
 }

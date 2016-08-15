@@ -22,7 +22,9 @@ public class Estabelecimento {
 	
 	private String cnpj;
 	
-	@OneToOne
+	private String site;
+	
+	@OneToOne (cascade = CascadeType.PERSIST)
 	private Endereco endereco;
 	
 	@ManyToOne
@@ -88,6 +90,14 @@ public class Estabelecimento {
 
 	public void setTipo(TipoEstabelecimento tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
 	}
 
 	@Override

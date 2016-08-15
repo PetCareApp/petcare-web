@@ -31,57 +31,78 @@
 	</header>
 
 	<div class="container">
-		<form th:object="${estabelecimento}" th:action="@{/estabelecimento/cadastrar}" action="#" method="POST" class="form-horizontal">
-			<h5 th:text="${proprietario.nome} + ' (' + ${proprietario.usuario.email} + ')'"></h5>
+		<form th:object="${estabelecimento}" th:action="${action == 'editar'} ? @{/estabelecimento/editar} : @{/estabelecimento/cadastrar}" action="#" method="POST" class="form-horizontal">
+<!-- 			<h5 th:text="${proprietario.nome} + ' (' + ${proprietario.usuario.email} + ')'"></h5> -->
+<!-- Afinal, o proprietário tem conta ? -->
 			<div class="form-group">
-				<div class="col-sm-8">
+				<div class="col-sm-6">
+					<label for="proprietario" class="control-label">Proprietário</label>
+					<select id="proprietario" th:field="*{proprietario.id}" class="form-control input-sm" required="required">
+						<option th:each="p : ${proprietarios}" th:text="${p.nome}" th:value="${p.id}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-6">
 					<label for="nome" class="control-label">Nome</label>
-					<input th:field="*{nome}" type="text" class="form-control input-sm" id="nome"/>
+					<input th:field="*{nome}" type="text" class="form-control input-sm" id="nome" required="required"/>
 				</div>
 				<div class="col-sm-4">
 					<label for="tipo" class="control-label">Tipo</label>
-					<select id="tipo" th:field="*{tipo.id}" class="form-control input-sm">
+					<select id="tipo" th:field="*{tipo.id}" class="form-control input-sm" required="required">
 						<option th:each="t : ${tipos}" th:text="${t.nome}" th:value="${t.id}"></option>
 					</select>
+				</div>
+				<div class="col-sm-2">
+					<label for="cnpj" class="control-label">CNPJ</label>
+					<input th:field="*{cnpj}" type="text" class="form-control input-sm" id="cnpj" required="required"/>
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-10">
 					<label for="endereco" class="control-label">Endereço</label>
-					<input th:field="*{endereco.rua}" id="endereco" type="text" class="form-control input-sm" />
+					<input th:field="*{endereco.rua}" id="endereco" type="text" class="form-control input-sm" required="required"/>
 				</div>
 				<div class="col-sm-2">
 					<label for="numero" class="control-label">Número</label>
-					<input th:field="*{endereco.numero}" id="numero" type="text" class="form-control input-sm" />
+					<input th:field="*{endereco.numero}" id="numero" type="text" class="form-control input-sm" required="required"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-4">
 					<label for="bairro" class="control-label">Bairro</label>
-					<input th:field="*{endereco.bairro}" id="bairro" type="text" class="form-control input-sm" />
+					<input th:field="*{endereco.bairro}" id="bairro" type="text" class="form-control input-sm" required="required"/>
 				</div>
 				<div class="col-sm-4">
 					<label for="cidade" class="control-label">Cidade</label>
-					<input th:field="*{endereco.cidade}" id="cidade" type="text" class="form-control input-sm" />
+					<input th:field="*{endereco.cidade}" id="cidade" type="text" class="form-control input-sm" required="required"/>
 				</div>
 				<div class="col-sm-4">
 					<label for="estado" class="control-label">Estado</label>
-					<input th:field="*{endereco.estado}" id="estado" type="text" class="form-control input-sm" />
+					<input th:field="*{endereco.estado}" id="estado" type="text" class="form-control input-sm" required="required"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<label for="cep" class="control-label">CEP</label>
-					<input th:field="*{endereco.cep}" id="cep" type="text" class="form-control input-sm" />
+					<input th:field="*{endereco.cep}" id="cep" type="text" class="form-control input-sm" required="required"/>
 				</div>
-				<div class="col-sm-6">
-					<label for="cep">Telefone</label>
-					<input th:field="*{endereco.telefone}" id="telefone" type="text" class="form-control input-sm" />
+				<div class="col-sm-4">
+					<label for="telefone">Telefone</label>
+					<input th:field="*{endereco.telefone}" id="telefone" type="text" class="form-control input-sm" required="required"/>
+				</div>
+				<div class="col-sm-4">
+					<label for="site">Site</label>
+					<input th:field="*{site}" id="site" type="text" class="form-control input-sm" required="required"/>
+				</div>
+				<div>
+					<input th:field="*{endereco.latitude}" id="latitude" type="hidden" required="required"/>
+					<input th:field="*{endereco.longitude}" id="longitude" type="hidden" required="required"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<button class="btn btn-success right" type="submit">Cadastrar</button>
+					<button id="cadastrar" class="btn btn-success right" onclick="getLatLong()" type="submit">Cadastrar</button>
 			</div>
 		</form>
 	</div>
@@ -91,8 +112,39 @@
     <script type="text/javascript" th:src="@{/resources/js/jquery.dataTables.min.js}"></script>
 	<script type="text/javascript" th:src="@{/resources/js/petcare.js}"></script>
 	
-	<script type="text/javascript">
-		$("#menu-proprietarios").addClass('active');
+	<script type="text/javascript" >
+		$("#menu-estabelecimentos").addClass('active');
+		// google maps
+		function getLatLong() {
+			var address =  document.getElementById('estado').value + ' ' + document.getElementById('cidade').value + ' ' + document.getElementById('endereco').value + ' ' + document.getElementById('numero').value;
+			address = retira_acentos(address).toLowerCase().replace(/ /g, "-");
+			console.log("address: "+address);
+			var key = "&amp;key=AIzaSyATXeSuocS-DqM7PBgr1VcTkmGmXq-icjI";
+				$.ajax({
+				  url:"http://maps.googleapis.com/maps/api/geocode/json?address="+address+"&amp;sensor=false"+key,
+				  type: "POST",
+				  success:function(res){
+				     console.log(res.results[0].geometry.location.lat);
+				     console.log(res.results[0].geometry.location.lng);
+				     document.getElementById("latitude").value = res.results[0].geometry.location.lat;
+			    	 document.getElementById("longitude").value = res.results[0].geometry.location.lng;
+				  }
+	       });
+		}
+		function retira_acentos(palavra) { 
+		    com_acento = 'áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ'; 
+		    sem_acento = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC'; 
+		    nova=""; 
+		    for(i = 0; palavra.length > i; i++) { 
+		        if (com_acento.search(palavra.substr(i,1))>=0) { 
+		            nova+=sem_acento.substr(com_acento.search(palavra.substr(i,1)),1); 
+		        } 
+		        else { 
+		            nova+=palavra.substr(i,1); 
+		        } 
+		    } 
+		    return nova; 
+		}
 	</script>
 </body>
 </html>

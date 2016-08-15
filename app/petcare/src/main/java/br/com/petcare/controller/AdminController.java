@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.petcare.model.Endereco;
 import br.com.petcare.model.Estabelecimento;
 import br.com.petcare.model.Proprietario;
 import br.com.petcare.model.Servico;
@@ -31,6 +32,12 @@ public class AdminController {
 	
 	@Inject
 	private ServicoService servicoService;
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginForm(Model model) {
+		model.addAttribute("usuario", new Usuario());
+		return Constants.PAGE_LOGIN;
+	}
 	
 	@RequestMapping(value = "proprietario/cadastrar", method = RequestMethod.GET)
 	public String cadastrarProprietarioForm(Model model) {
@@ -86,18 +93,46 @@ public class AdminController {
 		return Constants.REDIRECT_LISTAR_PROPRIETARIO;
 	}
 	
-	@RequestMapping(value = "estabelecimento/cadastrar/{id}", method = RequestMethod.GET)
-	public String cadastrarPetshopForm(@PathVariable("id") Integer idProp, Model model) {
-		model.addAttribute("proprietario", proprietarioService.find(idProp));
+	@RequestMapping(value = "estabelecimento/cadastrar", method = RequestMethod.GET)
+	public String cadastrarEstabelecimentoForm(Model model) {
 		model.addAttribute("estabelecimento", new Estabelecimento());
+		model.addAttribute("proprietarios", proprietarioService.getAll());
 		model.addAttribute("tipos", estabelecimentoService.getAllTipoEstabelecimento());
+		model.addAttribute("endereco", new Endereco());
 		return Constants.PAGE_CADASTRAR_ESTABELECIMENTO;
 	}
 	
 	@RequestMapping(value = "estabelecimento/cadastrar", method = RequestMethod.POST)
-	public String cadastrarPetshop(@ModelAttribute("estabelecimento") Estabelecimento estabelecimento) {
+	public String cadastrarEstabelecimento(@ModelAttribute("estabelecimento") Estabelecimento estabelecimento, 
+			RedirectAttributes redirect) {
 		estabelecimentoService.cadastrar(estabelecimento);
+		redirect.addFlashAttribute("info", Constants.MSG_ESTABELECIMENTO_CADASTRADO_SUCESSO);
+		return Constants.REDIRECT_CADASTRAR_ESTABELECIMENTO;
+	}
+	
+	@RequestMapping(value = "estabelecimento/editar/{id}", method = RequestMethod.GET)
+	public String editarEstabelecimentoForm(@PathVariable("id") Integer idProp, Model model) {
+		model.addAttribute("estabelecimento", estabelecimentoService.find(idProp));
+		model.addAttribute("proprietarios", proprietarioService.getAll());
+		model.addAttribute("tipos", estabelecimentoService.getAllTipoEstabelecimento());
+		model.addAttribute("endereco", new Endereco());
+		model.addAttribute("action", "editar");
 		return Constants.PAGE_CADASTRAR_ESTABELECIMENTO;
+	}
+	
+	@RequestMapping(value = "estabelecimento/editar", method = RequestMethod.POST)
+	public String editarEstabelecimento(@ModelAttribute("estabelecimento") Estabelecimento estabelecimento, 
+			RedirectAttributes redirect) {
+		Estabelecimento estab = estabelecimentoService.find(estabelecimento.getId());
+		estab.setNome(estabelecimento.getNome());
+		estab.setCnpj(estabelecimento.getCnpj());
+		estab.setEndereco(estabelecimento.getEndereco());
+		estab.setProprietario(estabelecimento.getProprietario());
+		estab.setSite(estabelecimento.getSite());
+		estab.setTipo(estabelecimento.getTipo());
+		estabelecimentoService.atualizar(estab);
+		redirect.addFlashAttribute("info", Constants.MSG_ESTABELECIMENTO_ATUALIZADO);
+		return Constants.REDIRECT_LISTAR_ESTABELECIMENTO;
 	}
 	
 	@RequestMapping(value = "estabelecimento/listar", method = RequestMethod.GET)
