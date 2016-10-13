@@ -17,6 +17,16 @@ public class Usuario {
 	private String password;
 	
 	private boolean habilitado;
+	
+	private String role;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public Integer getId() {
 		return id;

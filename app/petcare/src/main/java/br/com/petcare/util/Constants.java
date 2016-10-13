@@ -2,6 +2,8 @@ package br.com.petcare.util;
 
 public class Constants {
 	
+	public static String PAGE_LOGIN = "login";
+	
 	public static String PAGE_CADASTRAR_PROPRIETARIO = "cadastrar-proprietario";
 	
 	public static String PAGE_LISTAR_PROPRIETARIO = "listar-proprietario";
@@ -20,9 +22,13 @@ public class Constants {
 	
 	public static String PAGE_EDITAR_SERVICO = "editar-servico";
 	
+	public static String REDIRECT_LOGIN = "redirect:/usuario/login";
+	
 	public static String REDIRECT_CADASTRAR_PROPRIETARIO = "redirect:/proprietario/cadastrar";
 	
 	public static String REDIRECT_LISTAR_PROPRIETARIO = "redirect:/proprietario/listar";
+	
+	public static String REDIRECT_LISTAR_ESTABELECIMENTO = "redirect:/estabelecimento/listar";
 	
 	public static String REDIRECT_CADASTRAR_ESTABELECIMENTO = "redirect:/estabelecimento/cadastrar";
 	
@@ -45,6 +51,8 @@ public class Constants {
 	
 	public static String MSG_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Estabelecimento cadastrado com sucesso";
 	
+	public static String MSG_ESTABELECIMENTO_ATUALIZADO = "Estabelecimento atualizado com sucesso";
+	
 	public static String MSG_TIPO_ESTABELECIMENTO_CADASTRADO_SUCESSO = "Tipo de estabelecimento cadastrado com sucesso";
 	
 	public static String MSG_SERVICO_CADASTRADO_SUCESSO = "Serviço cadastrado com sucesso";
@@ -52,5 +60,7 @@ public class Constants {
 	public static String MSG_SERVICO_ATUALIZADO = "Serviço atualizado com sucesso";
 	
 	public static String MSG_SERVICO_DELETADO = "Serviço deletado com sucesso";
+	
+	public static String MSG_ERRO_LOGIN = "Email ou senha incorreto";
 
 }

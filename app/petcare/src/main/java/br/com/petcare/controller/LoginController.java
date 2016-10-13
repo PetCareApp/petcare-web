@@ -17,10 +17,12 @@ public class LoginController {
 		return Constants.REDIRECT_CADASTRAR_PROPRIETARIO;
 	}
 
+	/*
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
 	}
+	*/
 	
 	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
 	public String loginFailed(Model model) {

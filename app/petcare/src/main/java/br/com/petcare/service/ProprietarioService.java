@@ -20,6 +20,8 @@ public interface ProprietarioService {
 	
 	public Usuario findUsuario(Integer id);
 	
+	public Usuario findUsuario(String email, String password);
+	
 	public void atualizar(Usuario usuario);
 
 }
