@@ -18,8 +18,6 @@ public class Proprietario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;
-	
 	private String telefone;
 	
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -53,14 +51,6 @@ public class Proprietario {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public String getTelefone() {

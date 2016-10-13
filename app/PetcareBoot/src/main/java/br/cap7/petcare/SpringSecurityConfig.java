@@ -19,11 +19,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/admin/**").hasAuthority("ADMINISTRACAO")
+			.antMatchers("/css/**").permitAll().antMatchers("/js/**").permitAll()
+			.antMatchers("/fonts/**").permitAll().antMatchers("/img/**").permitAll()
 			.anyRequest().fullyAuthenticated()    
-			.and()
-				.formLogin().permitAll()
-			.and()
-	            .logout().logoutUrl("/logout").permitAll();
+			.and().formLogin()
+			.loginProcessingUrl("/login").loginPage("/login").permitAll().and().logout()
+			.logoutUrl("/logout").logoutSuccessUrl("/login");
 	}
 
 	@Override

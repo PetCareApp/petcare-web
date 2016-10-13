@@ -1,16 +1,12 @@
 package br.cap7.petcare.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
-public class ServicoCategoria {
+public class TipoServico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,17 +14,8 @@ public class ServicoCategoria {
 	
 	private String nome;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
-	private List<Servico> servicos;
+	private String descricao;
 	
-	public List<Servico> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -43,6 +30,14 @@ public class ServicoCategoria {
 	
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -61,7 +56,7 @@ public class ServicoCategoria {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServicoCategoria other = (ServicoCategoria) obj;
+		TipoServico other = (TipoServico) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

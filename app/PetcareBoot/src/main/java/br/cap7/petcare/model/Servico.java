@@ -17,11 +17,13 @@ public class Servico {
 	
 	private String descricao;
 	
+	private Double preco;
+	
 	@ManyToOne
 	private Estabelecimento estabelecimento;
 	
 	@ManyToOne
-	private ServicoCategoria categoria;
+	private TipoServico tipo;
 	
 	public String getNome() {
 		return nome;
@@ -33,6 +35,14 @@ public class Servico {
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	public Estabelecimento getEstabelecimento() {
@@ -47,12 +57,12 @@ public class Servico {
 		this.descricao = descricao;
 	}
 
-	public ServicoCategoria getCategoria() {
-		return categoria;
+	public TipoServico getTipo() {
+		return tipo;
 	}
 
-	public void setCategoria(ServicoCategoria categoria) {
-		this.categoria = categoria;
+	public void setTipo(TipoServico tipo) {
+		this.tipo = tipo;
 	}
 
 	public Integer getId() {

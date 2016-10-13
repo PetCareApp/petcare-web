@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Estabelecimento {
@@ -20,10 +19,25 @@ public class Estabelecimento {
 	
 	private String nome;
 	
+	private String razaoSocial;
+	
 	private String cnpj;
 	
-	@OneToOne
-	private Endereco endereco;
+	private String endereco;
+	
+	private String numero;
+	
+	private String bairro;
+	
+	private String cidade;
+	
+	private String estado;
+	
+	private String latitude;
+	
+	private String longitude;
+	
+	private String telefone;
 	
 	@ManyToOne
 	private Proprietario proprietario;
@@ -33,14 +47,6 @@ public class Estabelecimento {
 
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
 	private List<Servico> servicos;
-	
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
 
 	public List<Servico> getServicos() {
 		return servicos;
@@ -74,6 +80,14 @@ public class Estabelecimento {
 		this.nome = nome;
 	}
 
+	public String getRazaoSocial() {
+		return razaoSocial;
+	}
+
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
+	}
+
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -88,6 +102,70 @@ public class Estabelecimento {
 
 	public void setTipo(TipoEstabelecimento tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override
