@@ -18,7 +18,7 @@ public class Proprietario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String nome;
+	private String telefone;
 	
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Usuario usuario;
@@ -53,12 +53,12 @@ public class Proprietario {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public Usuario getUsuario() {

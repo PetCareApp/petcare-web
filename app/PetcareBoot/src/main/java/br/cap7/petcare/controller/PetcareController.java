@@ -10,5 +10,10 @@ public class PetcareController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping("/")
+	public String index() {
+		return "index";
+	}
 
 }

@@ -6,14 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class ServicoCategoria {
+public class TipoServico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	private String nome;
-
+	
+	private String descricao;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -28,6 +30,14 @@ public class ServicoCategoria {
 	
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -46,7 +56,7 @@ public class ServicoCategoria {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServicoCategoria other = (ServicoCategoria) obj;
+		TipoServico other = (TipoServico) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
