@@ -1,0 +1,18 @@
+body {
+	background-color: #fcfcfc;
+}
+
+.container {
+	width: 85%;
+	margin-top: 20px;
+}
+
+/** Color Material Icons */
+.material-icons.i-red {
+	color: #ef5350;
+}
+
+.material-icons.i-teal {
+	color: #009688;
+}
+
