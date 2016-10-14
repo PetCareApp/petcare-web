@@ -11,3 +11,4 @@
 *.project
 /bin/
 *.tmp
+/.tern-project

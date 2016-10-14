@@ -1,28 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>Petfy - Proprietários</title>
-    <link th:href="@{http://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
-	<link th:href="@{/css/materialize.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{/css/petcare.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-	<link th:href="@{/css/jquery.dataTables.min.css}" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-	<header>
-		<nav class="top-nav teal">
-			<div class="nav-wrapper">
-		      <a href="#" class="brand-logo">Petfy</a>
-		      <ul id="nav-mobile" class="right hide-on-med-and-down">
-		        <li><a th:href="@{/admin/proprietario/listar}">Proprietários</a></li>
-		      </ul>
-		    </div>
-		</nav>
-	</header>
-	
-	<div class="container">
-	<div class="row">
+	<div class="row" layout:fragment="content">
         <div class="col s12">
           <div class="card">
             <div class="card-content">
@@ -40,7 +25,7 @@
 		        </thead>
 		        <tbody>
 		        	<tr th:each="prop : ${proprietarios}">
-		        		<td th:text="${prop.usuario.nome}"></td>
+		        		<td><a th:href="@{'/admin/proprietario/detalhes/' + ${prop.id}}" th:text="${prop.usuario.nome}"></a></td>
 		        		<td th:text="${prop.usuario.email}"></td>
 		        		<td th:text="${prop.telefone}"></td>
 		        		<td><i th:class="'small material-icons ' + ${prop.usuario.habilitado ? 'i-teal' : 'i-red'}" th:text="${prop.usuario.habilitado ? 'done' : 'clear'}"></i></td>
@@ -50,14 +35,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
-	
-	<!--Import jQuery before materialize.js-->
-    <script type="text/javascript" th:src="@{https://code.jquery.com/jquery-2.1.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/petcare.js}"></script>
-
 </body>
 </html>

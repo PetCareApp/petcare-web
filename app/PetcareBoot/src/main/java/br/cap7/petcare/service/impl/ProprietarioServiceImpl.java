@@ -20,4 +20,9 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		return proprietarioRepository.findAll();
 	}
 
+	@Override
+	public Proprietario get(Integer id) {
+		return proprietarioRepository.findOne(id);
+	}
+
 }
