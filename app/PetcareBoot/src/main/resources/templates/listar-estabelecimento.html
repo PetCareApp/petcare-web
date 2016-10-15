@@ -18,7 +18,6 @@
 		                <th>Nome</th>
 		                <th>Tipo</th>
 		                <th>Proprietário</th>
-		                <th>Ativo</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -26,7 +25,6 @@
 		        		<td th:text="${est.nome}"></td>
 		        		<td th:text="${est.tipo.nome}"></td>
 		        		<td th:text="${est.proprietario.usuario.nome}"></td>
-		        		<td><i th:class="'small material-icons ' + ${est.ativo ? 'i-teal' : 'i-red'}" th:text="${est.ativo ? 'done' : 'clear'}"></i></td>
 		        	</tr>
 		        </tbody>
               </table>

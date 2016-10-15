@@ -13,19 +13,19 @@
         	<div class="divider"></div>
         	<div class="row">
 				<div class="col s5">
-					<h6>Email:</h6>
-					<h5 th:text="${proprietario.usuario.email}"></h5>
+					<h6 class="bold">Email:</h6>
+					<h6 th:text="${proprietario.usuario.email}"></h6>
 				</div>
 				<div class="col s5">
 					<h6 class="bold">Telefone:</h6>
-					<h5 th:text="${proprietario.telefone}"></h5>
+					<h6 th:text="${proprietario.telefone}"></h6>
 				</div>
 				<div class="col s2">
 					<h6 class="bold">Ativo:</h6>
-					<h5>
+					<h6>
 						<i th:class="'small material-icons ' + ${proprietario.usuario.habilitado ? 'i-teal' : 'i-red'}" 
 							th:text="${proprietario.usuario.habilitado ? 'done' : 'clear'}"></i>
-					</h5>
+					</h6>
 				</div>
 			</div>
         	<div class="card">
@@ -39,7 +39,6 @@
 			                <th>Nome</th>
 			                <th>Tipo</th>
 			                <th>Endereço</th>
-			                <th>Ativo</th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -47,7 +46,6 @@
 			        		<td th:text="${est.nome}"></td>
 			        		<td th:text="${est.tipo.nome}"></td>
 			        		<td th:text="${est.cidade} + ' - ' + ${est.estado}"></td>
-			        		<td><i th:class="'small material-icons ' + ${est.ativo ? 'i-teal' : 'i-red'}" th:text="${est.ativo ? 'done' : 'clear'}"></i></td>
 			        	</tr>
 			        </tbody>
 	              </table>
