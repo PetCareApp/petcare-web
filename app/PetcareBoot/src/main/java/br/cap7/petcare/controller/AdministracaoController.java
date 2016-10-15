@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.cap7.petcare.model.Estabelecimento;
 import br.cap7.petcare.model.Proprietario;
@@ -36,69 +37,93 @@ public class AdministracaoController {
 	
 	/** Gerenciamento de Proprietários */
 	@GetMapping("/proprietario/listar")
-	public String listarProprietario(Model model) {
-		model.addAttribute("proprietarios", proprietarioService.getAll());
-		return "listar-proprietario";
+	public ModelAndView listarProprietario() {
+		ModelAndView mav = new ModelAndView("listar-proprietario");
+		return mav.addObject("proprietarios", proprietarioService.getAll());
 	}
 	
 	@GetMapping("/proprietario/cadastrar")
-	public String cadastrarProprietario(Model model) {
-		model.addAttribute("proprietario", new Proprietario());
-		return "cadastrar-proprietario";
+	public ModelAndView cadastrarProprietario() {
+		ModelAndView mav = new ModelAndView("cadastrar-proprietario");
+		return mav.addObject("proprietario", new Proprietario());
 	}
 	
 	@PostMapping("/proprietario/cadastrar")
-	public String cadastrarProprietario(Proprietario proprietario) {
+	public ModelAndView cadastrarProprietario(Proprietario proprietario) {
 		adminService.cadastrar(proprietario);
-		return "redirect:/admin/proprietario/listar";
+		return this.listarProprietario();
 	}
 	
 	@GetMapping("/proprietario/detalhes/{id}")
-	public String visualizarProprietario(@PathVariable("id")Integer idProprietario, Model model) {
-		model.addAttribute("proprietario", proprietarioService.get(idProprietario));
-		return "visualizar-proprietario";
+	public ModelAndView visualizarProprietario(@PathVariable("id")Proprietario proprietario) {
+		if (proprietario == null) {
+			return this.listarProprietario();
+		}
+		ModelAndView mav = new ModelAndView("visualizar-proprietario");
+		return mav.addObject("proprietario", proprietario);
+	}
+	
+	/** Cadastrar novo estabelecimento para um proprietário */
+	@GetMapping("/proprietario/{id}/cadastrar-estabelecimento")
+	public ModelAndView cadastrarEstabelecimento(@PathVariable("id") Proprietario proprietario) {
+		if (proprietario == null) {
+			return this.listarProprietario();
+		}
+		ModelAndView mav = new ModelAndView("cadastrar-estabelecimento");
+		mav.addObject("proprietario", proprietario);
+		mav.addObject("tipos", estabelecimentoService.getAllTipoEstabelecimento());
+		return mav.addObject("estabelecimento", new Estabelecimento());
+	}
+	
+	@PostMapping("/proprietario/{id}/cadastrar-estabelecimento")
+	public ModelAndView cadastrarEstabelecimento(@PathVariable("id") Proprietario proprietario, Estabelecimento estabelecimento) {
+		if (proprietario == null) {
+			return this.listarProprietario();
+		}
+		estabelecimento.setProprietario(proprietario);
+		estabelecimentoService.cadastrar(estabelecimento);
+		return this.visualizarProprietario(proprietario);
 	}
 	
 	/** Gerenciamento de Estabelecimentos */
 	@GetMapping("/estabelecimento/listar")
-	public String listarEstabelecimento(Model model) {
-		model.addAttribute("estabelecimentos", estabelecimentoService.getAll());
-		return "listar-estabelecimento";
+	public ModelAndView listarEstabelecimento() {
+		ModelAndView mav = new ModelAndView("listar-estabelecimento");
+		return mav.addObject("estabelecimentos", estabelecimentoService.getAll());
 	}
 	
 	@GetMapping("/estabelecimento/cadastrar")
-	public String cadastrarEstabelecimento(Model model) {
-		model.addAttribute("estabelecimento", new Estabelecimento());
-		return "cadastrar-estabelecimento";
+	public ModelAndView cadastrarEstabelecimento(Model model) {
+		ModelAndView mav = new ModelAndView("cadastrar-estabelecimento");
+		return mav.addObject("estabelecimento", new Estabelecimento());
 	}
 	
 	@PostMapping("/estabelecimento/cadastrar")
-	public String cadastrarEstabelecimento(Estabelecimento estabelecimento) {
+	public ModelAndView cadastrarEstabelecimento(Estabelecimento estabelecimento) {
 		estabelecimentoService.cadastrar(estabelecimento);
-		return "redirect:/admin/estabelecimento/listar";
+		return this.listarEstabelecimento();
 	}
 	
 	/** Gerenciamento de Tipos de Serviços e Estabelecimentos */
 	@GetMapping("tipo-servico-estabelecimento")
-	public String gerenciarTiposServicoEstabelecimento(Model model) {
-		model.addAttribute("tipoServico", new TipoServico());
-		model.addAttribute("tipoEstabelecimento", new TipoEstabelecimento());
-		model.addAttribute("tiposServico", servicoService.getAllTipoServico());
-		model.addAttribute("tiposEstabelecimento", estabelecimentoService.getAllTipoEstabelecimento());
-		return "gerenciar-tipo-servico-estabelecimento";
+	public ModelAndView gerenciarTiposServicoEstabelecimento() {
+		ModelAndView mav = new ModelAndView("gerenciar-tipo-servico-estabelecimento");
+		mav.addObject("tipoServico", new TipoServico());
+		mav.addObject("tipoEstabelecimento", new TipoEstabelecimento());
+		mav.addObject("tiposServico", servicoService.getAllTipoServico());
+		return mav.addObject("tiposEstabelecimento", estabelecimentoService.getAllTipoEstabelecimento());
 	}
 	
 	@PostMapping("tipo-estabelecimento/cadastrar")
-	public String cadastrarTipoEstabelecimento(TipoEstabelecimento tipoEstabelecimento) {
+	public ModelAndView cadastrarTipoEstabelecimento(TipoEstabelecimento tipoEstabelecimento) {
 		estabelecimentoService.cadastrar(tipoEstabelecimento);
-		return "redirect:/admin/tipo-servico-estabelecimento";
+		return this.gerenciarTiposServicoEstabelecimento();
 	}
 	
 	@PostMapping("tipo-servico/cadastrar")
-	public String cadastrarTipoServico(TipoServico tipoServico) {
+	public ModelAndView cadastrarTipoServico(TipoServico tipoServico) {
 		servicoService.cadastrar(tipoServico);
-		return "redirect:/admin/tipo-servico-estabelecimento";
+		return this.gerenciarTiposServicoEstabelecimento();
 	}
 	
-
 }

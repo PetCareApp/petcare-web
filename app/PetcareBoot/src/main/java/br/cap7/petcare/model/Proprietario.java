@@ -23,7 +23,7 @@ public class Proprietario {
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Usuario usuario;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "proprietario")
 	private List<Estabelecimento> estabelecimentos;
 	
 	public List<Estabelecimento> getEstabelecimentos() {

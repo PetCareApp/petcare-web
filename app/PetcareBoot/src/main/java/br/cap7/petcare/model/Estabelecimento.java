@@ -39,8 +39,6 @@ public class Estabelecimento {
 	
 	private String telefone;
 	
-	private boolean ativo;
-	
 	@ManyToOne
 	private Proprietario proprietario;
 	
@@ -168,14 +166,6 @@ public class Estabelecimento {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	@Override
