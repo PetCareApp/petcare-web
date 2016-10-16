@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petfy - Estabelecimentos</title>
+</head>
+<body>
+	<div class="row" layout:fragment="content">
+        <div class="col s12">
+        	<h5 class="header" th:text="${estabelecimento.nome}"></h5>
+        	<div class="divider"></div>
+        	<div class="row">
+				<div class="col s4">
+					<h6 class="bold">Tipo:</h6>
+					<h6 th:text="${estabelecimento.tipo.nome}"></h6>
+				</div>
+				<div class="col s4">
+					<h6 class="bold">CNPJ:</h6>
+					<h6 th:text="${estabelecimento.cnpj}"></h6>
+				</div>
+				<div class="col s4">
+					<h6 class="bold">Endereço:</h6>
+					<h6 th:text="${estabelecimento.cidade + '-' + estabelecimento.estado}"></h6>
+				</div>
+			</div>
+        	<div class="card">
+	            <div class="card-content">
+	              <span class="card-title">Serviços</span>
+	              <a th:href="@{'/proprietario/cadastrar-servico/' + ${estabelecimento.id}}" class="btn-floating btn-large waves-effect waves-light teal right tooltipped" 
+	              		data-position="bottom" data-delay="50" data-tooltip="Novo serviço"><i class="material-icons">add</i></a>
+	              <table class="hover stripe">
+	              <thead>
+			            <tr>
+			                <th>Nome</th>
+			                <th>Descrição</th>
+			                <th>Tipo</th>
+			                <th>Preço</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<tr th:each="serv : ${estabelecimento.servicos}">
+			        		<td th:text="${serv.nome}"></td>
+			        		<td th:text="${serv.descricao}"></td>
+			        		<td th:text="${serv.tipo.nome}"></td>
+			        		<td th:text="${serv.preco}"></td>
+			        	</tr>
+			        </tbody>
+	              </table>
+	            </div>
+          	</div>
+        </div>
+    </div>
+</body>
+</html>

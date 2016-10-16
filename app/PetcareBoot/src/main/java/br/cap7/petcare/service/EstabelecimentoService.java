@@ -11,6 +11,8 @@ public interface EstabelecimentoService {
 	
 	List<TipoEstabelecimento> getAllTipoEstabelecimento();
 	
+	List<Estabelecimento> getAll(String emailProprietario);
+	
 	void cadastrar(TipoEstabelecimento tipoEstabelecimento);
 	
 	void cadastrar(Estabelecimento estabelecimento);

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petfy - Estabelecimentos</title>
+</head>
+<body>
+	<div class="row" layout:fragment="content">
+        <div class="col s12">
+        	<div class="card">
+	            <div class="card-content">
+	              <span class="card-title">Meus Estabelecimentos</span>
+	              <table class="hover stripe">
+	              <thead>
+			            <tr>
+			                <th>Nome</th>
+			                <th>Tipo</th>
+			                <th>Endereço</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<tr th:each="est : ${estabelecimentos}">
+			        		<td><a th:href="@{'/proprietario/visualizar-estabelecimento/' + ${est.id}}" th:text="${est.nome}"></a></td>
+			        		<td th:text="${est.tipo.nome}"></td>
+			        		<td th:text="${est.cidade} + ' - ' + ${est.estado}"></td>
+			        	</tr>
+			        </tbody>
+	              </table>
+	            </div>
+          	</div>
+        </div>
+    </div>
+</body>
+</html>

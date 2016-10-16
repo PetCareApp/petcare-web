@@ -40,4 +40,9 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 		estabelecimentoRepository.save(estabelecimento);
 	}
 
+	@Override
+	public List<Estabelecimento> getAll(String emailProprietario) {
+		return estabelecimentoRepository.findByproprietarioUsuarioEmail(emailProprietario);
+	}
+
 }

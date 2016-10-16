@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.cap7.petcare.model.Servico;
 import br.cap7.petcare.model.TipoServico;
+import br.cap7.petcare.repository.ServicoRepository;
 import br.cap7.petcare.repository.TipoServicoRepository;
 import br.cap7.petcare.service.ServicoService;
 
@@ -14,6 +16,9 @@ public class ServicoServiceImpl implements ServicoService {
 	
 	@Autowired
 	private TipoServicoRepository tipoServicoRepository;
+	
+	@Autowired
+	private ServicoRepository servicoRepository;
 
 	@Override
 	public List<TipoServico> getAllTipoServico() {
@@ -23,6 +28,11 @@ public class ServicoServiceImpl implements ServicoService {
 	@Override
 	public void cadastrar(TipoServico tipoServico) {
 		tipoServicoRepository.save(tipoServico);
+	}
+
+	@Override
+	public void cadastrar(Servico servico) {
+		servicoRepository.save(servico);
 	}
 
 }
