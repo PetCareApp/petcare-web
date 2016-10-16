@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petfy - Cadastrar Serviço</title>
+</head>
+<body>
+	<div layout:fragment="content">
+        <div class="col s12">
+        	<h5 class="header" th:text="${estabelecimento.nome}"></h5>
+        	<div class="divider"></div>
+        	<div class="row">
+				<div class="col s4">
+					<h6 class="bold">Tipo:</h6>
+					<h6 th:text="${estabelecimento.tipo.nome}"></h6>
+				</div>
+				<div class="col s4">
+					<h6 class="bold">CNPJ:</h6>
+					<h6 th:text="${estabelecimento.cnpj}"></h6>
+				</div>
+				<div class="col s4">
+					<h6 class="bold">Endereço:</h6>
+					<h6 th:text="${estabelecimento.cidade + '-' + estabelecimento.estado}"></h6>
+				</div>
+			</div>
+	          <div class="card">
+	            <div class="card-content">
+	              <span class="card-title">Cadastrar Serviço</span>
+	              <form class="s12" th:action="@{'/proprietario/cadastrar-servico/' + ${estabelecimento.id}}" th:object="${servico}" method="post">
+					<div class="row">
+				        <div class="input-field col s4">
+				          <input id="nome" type="text" th:field="*{nome}"/>
+				          <label for="nome">Nome</label>
+				        </div>
+				        <div class="input-field col s4">
+				          <select id="tipo" th:field="*{tipo}">
+				          	<option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"></option>
+				          </select>
+				          <label for="tipo">Tipo</label>
+				        </div>
+				        <div class="input-field col s4">
+				          <input id="preco" type="text" th:field="*{preco}"/>
+				          <label for="preco">Preço</label>
+				        </div>
+			      	</div>
+			      	<div class="row">
+			      		<div class="input-field col s12">
+				          <textarea id="descricao" class="materialize-textarea" th:field="*{descricao}"></textarea>
+				          <label for="descricao">Descrição</label>
+				        </div>
+			      	</div>
+			      	<div class="row">
+		      			<button type="submit" class="waves-effect waves-light btn right">Cadastrar</button>
+		      		</div>
+				</form>
+	            </div>
+	          </div>
+        </div>
+    </div>
+	
+	<section layout:fragment="js">
+		<!-- inclui aqui os javascripts específicos dessa página -->
+	</section>
+
+</body>
+</html>
