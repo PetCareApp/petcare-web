@@ -19,8 +19,9 @@
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
 		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/proprietario/listar}">Proprietários</a></li>
 		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/estabelecimento/listar}">Estabelecimentos</a></li>
-		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/tipo-servico-estabelecimento}">Gerenciar</a></li>
+		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/gerenciar}">Gerenciar</a></li>
 		        <li sec:authorize="hasAuthority('PROPRIETARIO')"><a th:href="@{/proprietario/listar-estabelecimentos}">Meus Estabelecimentos</a></li>
+		        <li sec:authorize="hasAuthority('PROPRIETARIO')"><a th:href="@{/proprietario/agenda}">Agenda</a></li>
 		      </ul>
 		    </div>
 		</nav>

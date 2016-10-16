@@ -31,7 +31,8 @@
 	          <div class="card">
 	            <div class="card-content">
 	              <span class="card-title">Cadastrar Estabelecimento</span>
-	              <form class="s12" th:action="@{'/admin/proprietario/' + ${proprietario.id} + '/cadastrar-estabelecimento'}" th:object="${estabelecimento}" method="post">
+	              <form class="s12" th:action="@{/admin/proprietario/cadastrar-estabelecimento}" th:object="${estabelecimento}" method="post">
+					<input type="hidden" name="proprietario" th:value="${proprietario.id}"/>
 					<div class="row">
 				        <div class="input-field col s6">
 				          <input id="nome" type="text" th:field="*{nome}"/>

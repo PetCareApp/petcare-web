@@ -28,8 +28,34 @@
         	<div class="card">
 	            <div class="card-content">
 	              <span class="card-title">Serviços</span>
-	              <a th:href="@{'/proprietario/cadastrar-servico/' + ${estabelecimento.id}}" class="btn-floating btn-large waves-effect waves-light teal right tooltipped" 
-	              		data-position="bottom" data-delay="50" data-tooltip="Novo serviço"><i class="material-icons">add</i></a>
+	              <form class="s12" th:action="@{/proprietario/cadastrar-servico}" th:object="${servico}" method="post">
+					<input type="hidden" name="estabelecimento" th:value="${estabelecimento.id}"/>
+					<div class="row">
+				        <div class="input-field col s4">
+				          <input id="nome" type="text" th:field="*{nome}"/>
+				          <label for="nome">Nome</label>
+				        </div>
+				        <div class="input-field col s4">
+				          <select id="tipo" th:field="*{tipo}">
+				          	<option th:each="tipo : ${tipos}" th:value="${tipo.id}" th:text="${tipo.nome}"></option>
+				          </select>
+				          <label for="tipo">Tipo</label>
+				        </div>
+				        <div class="input-field col s4">
+				          <input id="preco" type="text" th:field="*{preco}"/>
+				          <label for="preco">Preço</label>
+				        </div>
+			      	</div>
+			      	<div class="row">
+			      		<div class="input-field col s12">
+				          <textarea id="descricao" class="materialize-textarea" th:field="*{descricao}"></textarea>
+				          <label for="descricao">Descrição</label>
+				        </div>
+			      	</div>
+			      	<div class="row">
+		      			<button type="submit" class="waves-effect waves-light btn right">Cadastrar</button>
+		      		</div>
+				</form>
 	              <table class="hover stripe">
 	              <thead>
 			            <tr>

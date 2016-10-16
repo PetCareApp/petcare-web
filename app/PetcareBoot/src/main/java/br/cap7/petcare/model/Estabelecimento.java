@@ -47,6 +47,9 @@ public class Estabelecimento {
 
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
 	private List<Servico> servicos;
+	
+	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
+	private List<Agendamento> agendamentos;
 
 	public List<Servico> getServicos() {
 		return servicos;
@@ -166,6 +169,14 @@ public class Estabelecimento {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
 	}
 
 	@Override

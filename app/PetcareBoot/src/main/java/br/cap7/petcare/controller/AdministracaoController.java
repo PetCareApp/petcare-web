@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.cap7.petcare.model.Estabelecimento;
@@ -33,7 +34,6 @@ public class AdministracaoController {
 	
 	@Autowired
 	private ServicoService servicoService;
-	
 	
 	/** Gerenciamento de Proprietários */
 	@GetMapping("/proprietario/listar")
@@ -75,8 +75,8 @@ public class AdministracaoController {
 		return mav.addObject("estabelecimento", new Estabelecimento());
 	}
 	
-	@PostMapping("/proprietario/{id}/cadastrar-estabelecimento")
-	public ModelAndView cadastrarEstabelecimento(@PathVariable("id") Proprietario proprietario, Estabelecimento estabelecimento) {
+	@PostMapping("/proprietario/cadastrar-estabelecimento")
+	public ModelAndView cadastrarEstabelecimento(@RequestParam("proprietario") Proprietario proprietario, Estabelecimento estabelecimento) {
 		if (proprietario == null) {
 			return this.listarProprietario();
 		}
@@ -104,10 +104,10 @@ public class AdministracaoController {
 		return this.listarEstabelecimento();
 	}
 	
-	/** Gerenciamento de Tipos de Serviços e Estabelecimentos */
-	@GetMapping("tipo-servico-estabelecimento")
-	public ModelAndView gerenciarTiposServicoEstabelecimento() {
-		ModelAndView mav = new ModelAndView("gerenciar-tipo-servico-estabelecimento");
+	/** Gerenciamento de Tipos de Serviços, Estabelecimentos e Agendamentos*/
+	@GetMapping("gerenciar")
+	public ModelAndView gerenciar() {
+		ModelAndView mav = new ModelAndView("gerenciar");
 		mav.addObject("tipoServico", new TipoServico());
 		mav.addObject("tipoEstabelecimento", new TipoEstabelecimento());
 		mav.addObject("tiposServico", servicoService.getAllTipoServico());
@@ -117,13 +117,13 @@ public class AdministracaoController {
 	@PostMapping("tipo-estabelecimento/cadastrar")
 	public ModelAndView cadastrarTipoEstabelecimento(TipoEstabelecimento tipoEstabelecimento) {
 		estabelecimentoService.cadastrar(tipoEstabelecimento);
-		return this.gerenciarTiposServicoEstabelecimento();
+		return this.gerenciar();
 	}
 	
 	@PostMapping("tipo-servico/cadastrar")
 	public ModelAndView cadastrarTipoServico(TipoServico tipoServico) {
 		servicoService.cadastrar(tipoServico);
-		return this.gerenciarTiposServicoEstabelecimento();
+		return this.gerenciar();
 	}
 	
 }
