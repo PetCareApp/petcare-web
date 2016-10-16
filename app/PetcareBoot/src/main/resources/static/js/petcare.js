@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-	$('table').DataTable({
+	$('.table-datatables').DataTable({
 		"language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
         },

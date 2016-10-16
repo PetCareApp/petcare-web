@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title>Petfy - Agendamentos</title>
+</head>
+<body>
+	<div class="row" layout:fragment="content">
+        <div class="col s12">
+			<ul class="tabs">
+				<li th:each="est : ${estabelecimentos}" class="tab col"><a
+					th:href="'#' + ${est.id}" th:text="${est.nome}"></a></li>
+			</ul>
+			<div th:each="est : ${estabelecimentos}" th:id="${est.id}">
+				<div class="card">
+					<div class="card-content">
+						<form class="s12" th:action="@{/proprietario/cadastrar-agendamento/}"
+							th:object="${agendamento}" method="post">
+							<input type="hidden" name="estabelecimento" th:value="${est.id}" />
+							<div class="row">
+								<div class="input-field col s4">
+									<input id="data" type="text" th:field="*{data}" /> <label
+										for="data">Data</label>
+								</div>
+								<div class="input-field col s4">
+									<input id="hora" type="text" th:field="*{hora}" /> <label
+										for="hora">Hora</label>
+								</div>
+								<div class="input-field col s4">
+									<select id="tipo" th:field="*{tipo}">
+										<option th:each="tipo : ${tipos}" th:value="${tipo.id}"
+											th:text="${tipo.nome}"></option>
+									</select> <label for="tipo">Tipo</label>
+								</div>
+							</div>
+							<div class="row">
+								<button type="submit" class="waves-effect waves-light btn right">Cadastrar</button>
+							</div>
+						</form>
+						<table class="hover stripe">
+							<thead>
+								<tr>
+									<th>Data</th>
+									<th>Hora</th>
+									<th>Tipo</th>
+									<th>Status</th>
+									<th>Cliente</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="agenda : ${est.agendamentos}">
+									<td th:text="${#dates.format(agenda.data, 'dd/MM/yyyy')}"></td>
+									<td th:text="${#dates.format(agenda.hora, 'hh:mm')}"></td>
+									<td th:text="${agenda.tipo.nome}"></td>
+									<td th:text="${agenda.status.descricao}"></td>
+									<td th:text="${agenda.cliente != null} ? ${agenda.cliente.nome}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+         </div>
+    </div>
+</body>
+</html>

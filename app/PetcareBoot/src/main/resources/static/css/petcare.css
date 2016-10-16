@@ -20,7 +20,7 @@ h5.header {
 	color: teal;
 }
 
-h6.bold {
+.bold {
 	font-weight: bold;
 }
 
@@ -30,3 +30,14 @@ nav .brand-logo {
 	margin-right: 40px;
 }
 
+.tabs .tab a {
+	color: teal;
+}
+
+.tabs .tab a:hover {
+	color: #4db6ac;
+}
+
+.tabs .indicator {
+	background-color: teal;
+}
