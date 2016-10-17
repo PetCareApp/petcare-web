@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+	layout:decorator="layout"
+	th:with="currentPage='estabelecimentos'">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>Petfy - Estabelecimentos</title>
@@ -12,12 +13,13 @@
           <div class="card">
             <div class="card-content">
               <span class="card-title">Estabelecimentos</span>
-              <table class="hover stripe">
+              <table class="hover stripe table-datatables">
               <thead>
 		            <tr>
 		                <th>Nome</th>
 		                <th>Tipo</th>
 		                <th>Proprietário</th>
+		                <th>Endereço</th>
 		            </tr>
 		        </thead>
 		        <tbody>
@@ -25,6 +27,7 @@
 		        		<td th:text="${est.nome}"></td>
 		        		<td th:text="${est.tipo.nome}"></td>
 		        		<td th:text="${est.proprietario.usuario.nome}"></td>
+		        		<td th:text="${est.endereco + ', ' + est.numero + ', ' + est.bairro + ', ' + est.cidade + '-' + est.estado}"></td>
 		        	</tr>
 		        </tbody>
               </table>

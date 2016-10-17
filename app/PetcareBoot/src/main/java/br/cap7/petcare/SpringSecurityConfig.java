@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import br.cap7.petcare.model.Papel.NomePapel;
 
 @Configuration
 @EnableWebSecurity
@@ -18,13 +21,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/admin/**").hasAuthority("ADMINISTRACAO")
+			.antMatchers("/admin/**").hasAuthority(NomePapel.ADMINISTRACAO.toString())
+			.antMatchers("/proprietario/**").hasAuthority(NomePapel.PROPRIETARIO.toString())
 			.antMatchers("/css/**").permitAll().antMatchers("/js/**").permitAll()
 			.antMatchers("/fonts/**").permitAll().antMatchers("/img/**").permitAll()
 			.anyRequest().fullyAuthenticated()    
-			.and().formLogin()
-			.loginProcessingUrl("/login").loginPage("/login").permitAll().and().logout()
-			.logoutUrl("/logout").logoutSuccessUrl("/login");
+			.and().formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll()
+			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
 	}
 
 	@Override
