@@ -1,6 +1,6 @@
 package br.cap7.petcare.service.impl;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 	private AgendamentoRepository agendamentoRepository;
 
 	@Override
-	public List<Agendamento> getAgendamentos(Estabelecimento estabelecimento, LocalDate data) {
-		return agendamentoRepository.findByEstabelecimentoAndDataOrderByHoraAsc(estabelecimento, data);
+	public List<Agendamento> getAgendamentos(Estabelecimento estabelecimento, Date data, StatusAgendamento status) {
+		return agendamentoRepository.findByEstabelecimentoAndDataAndStatusOrderByHoraAsc(estabelecimento, data, status);
 	}
 
 	@Override

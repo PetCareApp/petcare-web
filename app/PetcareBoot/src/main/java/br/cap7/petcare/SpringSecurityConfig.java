@@ -25,6 +25,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/proprietario/**").hasAuthority(NomePapel.PROPRIETARIO.toString())
 			.antMatchers("/css/**").permitAll().antMatchers("/js/**").permitAll()
 			.antMatchers("/fonts/**").permitAll().antMatchers("/img/**").permitAll()
+			.antMatchers("/rest/**").permitAll()
 			.anyRequest().fullyAuthenticated()    
 			.and().formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll()
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
