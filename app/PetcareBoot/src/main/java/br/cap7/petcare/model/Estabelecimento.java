@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Estabelecimento {
 	
@@ -39,15 +41,18 @@ public class Estabelecimento {
 	
 	private String telefone;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Proprietario proprietario;
 	
 	@ManyToOne
 	private TipoEstabelecimento tipo;
 
+	@JsonIgnore
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
 	private List<Servico> servicos;
 	
+	@JsonIgnore
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "estabelecimento")
 	private List<Agendamento> agendamentos;
 

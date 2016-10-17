@@ -1,6 +1,8 @@
 package br.cap7.petcare.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +15,12 @@ public class Papel implements GrantedAuthority {
 	@Id
 	private Integer id;
 	
-	private String nome;
+	@Enumerated(EnumType.STRING)
+	private NomePapel nome;
+	
+	public enum NomePapel {
+		ADMINISTRACAO, PROPRIETARIO;
+	}
 
 	public Integer getId() {
 		return id;
@@ -23,17 +30,17 @@ public class Papel implements GrantedAuthority {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public NomePapel getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(NomePapel nome) {
 		this.nome = nome;
 	}
 
 	@Override
 	public String getAuthority() {
-		return this.nome;
+		return this.nome.toString();
 	}
 	
 	

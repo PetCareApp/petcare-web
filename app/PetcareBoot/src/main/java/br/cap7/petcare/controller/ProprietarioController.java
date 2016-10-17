@@ -42,7 +42,7 @@ public class ProprietarioController {
 		if (estabelecimento == null || 
 				!estabelecimento.getProprietario().getUsuario().getEmail()
 				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
-			return this.listarEstabelecimentos();
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
 		}
 		ModelAndView mav = new ModelAndView("proprietario/visualizar-estabelecimento");
 		mav.addObject("tipos", servicoService.getAllTipoServico());
@@ -55,11 +55,11 @@ public class ProprietarioController {
 		if (estabelecimento == null || 
 				!estabelecimento.getProprietario().getUsuario().getEmail()
 				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
-			return this.listarEstabelecimentos();
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
 		}
 		servico.setEstabelecimento(estabelecimento);
 		servicoService.cadastrar(servico);
-		return this.visualizarEstabelecimento(estabelecimento);
+		return new ModelAndView("redirect:/proprietario/visualizar-estabelecimento/" + estabelecimento.getId());
 		
 	}
 	
@@ -76,11 +76,11 @@ public class ProprietarioController {
 		if (estabelecimento == null || 
 				!estabelecimento.getProprietario().getUsuario().getEmail()
 				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
-			return this.listarEstabelecimentos();
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
 		}
 		agendamento.setEstabelecimento(estabelecimento);
 		agendamentoService.cadastrar(agendamento);
-		return this.visualizarEstabelecimento(estabelecimento);
+		return new ModelAndView("redirect:/proprietario/visualizar-estabelecimento/" + estabelecimento.getId());
 	}
 	
 }

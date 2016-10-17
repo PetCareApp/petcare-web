@@ -39,25 +39,20 @@ public class AdministracaoController {
 	@GetMapping("/proprietario/listar")
 	public ModelAndView listarProprietario() {
 		ModelAndView mav = new ModelAndView("listar-proprietario");
+		mav.addObject("proprietario", new Proprietario());
 		return mav.addObject("proprietarios", proprietarioService.getAll());
-	}
-	
-	@GetMapping("/proprietario/cadastrar")
-	public ModelAndView cadastrarProprietario() {
-		ModelAndView mav = new ModelAndView("cadastrar-proprietario");
-		return mav.addObject("proprietario", new Proprietario());
 	}
 	
 	@PostMapping("/proprietario/cadastrar")
 	public ModelAndView cadastrarProprietario(Proprietario proprietario) {
 		adminService.cadastrar(proprietario);
-		return this.listarProprietario();
+		return new ModelAndView("redirect:/admin/proprietario/listar");
 	}
 	
 	@GetMapping("/proprietario/detalhes/{id}")
 	public ModelAndView visualizarProprietario(@PathVariable("id")Proprietario proprietario) {
 		if (proprietario == null) {
-			return this.listarProprietario();
+			return new ModelAndView("redirect:/admin/proprietario/listar");
 		}
 		ModelAndView mav = new ModelAndView("visualizar-proprietario");
 		return mav.addObject("proprietario", proprietario);
@@ -67,7 +62,7 @@ public class AdministracaoController {
 	@GetMapping("/proprietario/{id}/cadastrar-estabelecimento")
 	public ModelAndView cadastrarEstabelecimento(@PathVariable("id") Proprietario proprietario) {
 		if (proprietario == null) {
-			return this.listarProprietario();
+			return new ModelAndView("redirect:/admin/proprietario/listar");
 		}
 		ModelAndView mav = new ModelAndView("cadastrar-estabelecimento");
 		mav.addObject("proprietario", proprietario);
@@ -78,11 +73,11 @@ public class AdministracaoController {
 	@PostMapping("/proprietario/cadastrar-estabelecimento")
 	public ModelAndView cadastrarEstabelecimento(@RequestParam("proprietario") Proprietario proprietario, Estabelecimento estabelecimento) {
 		if (proprietario == null) {
-			return this.listarProprietario();
+			return new ModelAndView("redirect:/admin/proprietario/listar");
 		}
 		estabelecimento.setProprietario(proprietario);
 		estabelecimentoService.cadastrar(estabelecimento);
-		return this.visualizarProprietario(proprietario);
+		return new ModelAndView("redirect:/admin/proprietario/detalhes/" + proprietario.getId());
 	}
 	
 	/** Gerenciamento de Estabelecimentos */
@@ -101,7 +96,7 @@ public class AdministracaoController {
 	@PostMapping("/estabelecimento/cadastrar")
 	public ModelAndView cadastrarEstabelecimento(Estabelecimento estabelecimento) {
 		estabelecimentoService.cadastrar(estabelecimento);
-		return this.listarEstabelecimento();
+		return new ModelAndView("redirect:/admin/estabelecimento/listar");
 	}
 	
 	/** Gerenciamento de Tipos de Serviços, Estabelecimentos e Agendamentos*/
@@ -117,13 +112,13 @@ public class AdministracaoController {
 	@PostMapping("tipo-estabelecimento/cadastrar")
 	public ModelAndView cadastrarTipoEstabelecimento(TipoEstabelecimento tipoEstabelecimento) {
 		estabelecimentoService.cadastrar(tipoEstabelecimento);
-		return this.gerenciar();
+		return new ModelAndView("redirect:/admin/gerenciar");
 	}
 	
 	@PostMapping("tipo-servico/cadastrar")
 	public ModelAndView cadastrarTipoServico(TipoServico tipoServico) {
 		servicoService.cadastrar(tipoServico);
-		return this.gerenciar();
+		return new ModelAndView("redirect:/admin/gerenciar");
 	}
 	
 }

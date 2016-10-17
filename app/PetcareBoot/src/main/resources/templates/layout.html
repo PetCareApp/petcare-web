@@ -17,11 +17,24 @@
 			<div class="nav-wrapper">
 		      <a href="#" class="brand-logo left">Petfy</a>
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
-		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/proprietario/listar}">Proprietários</a></li>
-		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/estabelecimento/listar}">Estabelecimentos</a></li>
-		        <li sec:authorize="hasAuthority('ADMINISTRACAO')"><a th:href="@{/admin/gerenciar}">Gerenciar</a></li>
-		        <li sec:authorize="hasAuthority('PROPRIETARIO')"><a th:href="@{/proprietario/listar-estabelecimentos}">Meus Estabelecimentos</a></li>
-		        <li sec:authorize="hasAuthority('PROPRIETARIO')"><a th:href="@{/proprietario/agenda}">Agenda</a></li>
+		        <li th:classappend="(${currentPage} == 'proprietarios')? active" sec:authorize="hasAuthority('ADMINISTRACAO')">
+		        	<a th:href="@{/admin/proprietario/listar}">Proprietários</a>
+		        </li>
+		        <li th:classappend="(${currentPage} == 'estabelecimentos')? active" sec:authorize="hasAuthority('ADMINISTRACAO')">
+		        	<a th:href="@{/admin/estabelecimento/listar}">Estabelecimentos</a>
+		        </li>
+		        <li th:classappend="(${currentPage} == 'gerenciar')? active" sec:authorize="hasAuthority('ADMINISTRACAO')">
+		        	<a th:href="@{/admin/gerenciar}">Gerenciar</a>
+		        </li>
+		        <li th:classappend="(${currentPage} == 'meus-estabelecimentos')? active" sec:authorize="hasAuthority('PROPRIETARIO')">
+		        	<a th:href="@{/proprietario/listar-estabelecimentos}">Meus Estabelecimentos</a>
+		        </li>
+		        <li th:classappend="(${currentPage} == 'agenda')? active" sec:authorize="hasAuthority('PROPRIETARIO')">
+		        	<a th:href="@{/proprietario/agenda}">Agenda</a>
+		        </li>
+		        <li class="right">
+		        	<a th:href="@{/logout}">Sair</a>
+		        </li>
 		      </ul>
 		    </div>
 		</nav>

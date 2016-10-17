@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+	layout:decorator="layout"
+	th:with="currentPage='proprietarios'">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<title>Petfy - Proprietários</title>
@@ -12,26 +13,43 @@
           <div class="card">
             <div class="card-content">
               <span class="card-title">Proprietários</span>
-              <a th:href="@{/admin/proprietario/cadastrar}" class="btn-floating btn-large waves-effect waves-light teal right tooltipped" 
-              		data-position="bottom" data-delay="50" data-tooltip="Novo proprietário"><i class="material-icons">add</i></a>
-              <table class="hover stripe">
-              <thead>
-		            <tr>
-		                <th>Nome</th>
-		                <th>Email</th>
-		                <th>Telefone</th>
-		                <th>Ativo</th>
-		            </tr>
-		        </thead>
-		        <tbody>
-		        	<tr th:each="prop : ${proprietarios}">
-		        		<td><a th:href="@{'/admin/proprietario/detalhes/' + ${prop.id}}" th:text="${prop.usuario.nome}"></a></td>
-		        		<td th:text="${prop.usuario.email}"></td>
-		        		<td th:text="${prop.telefone}"></td>
-		        		<td><i th:class="'small material-icons ' + ${prop.usuario.habilitado ? 'i-teal' : 'i-red'}" th:text="${prop.usuario.habilitado ? 'done' : 'clear'}"></i></td>
-		        	</tr>
-		        </tbody>
-              </table>
+				<form class="s12" th:action="@{/admin/proprietario/cadastrar}" th:object="${proprietario}" method="post">
+					<div class="row">
+						<div class="input-field col s4">
+							<input id="nome" type="text" th:field="*{usuario.nome}" />
+							<label for="nome">Nome</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="email" type="text" th:field="*{usuario.email}" />
+							<label for="email">Email</label>
+						</div>
+						<div class="input-field col s4">
+							<input id="telefone" type="text" th:field="*{telefone}" />
+							<label for="telefone">Telefone</label>
+						</div>
+					</div>
+					<div class="row">
+						<button type="submit" class="waves-effect waves-light btn right">Cadastrar</button>
+					</div>
+				</form>
+				<table class="hover stripe table-datatables">
+	              <thead>
+			            <tr>
+			                <th>Nome</th>
+			                <th>Email</th>
+			                <th>Telefone</th>
+			                <th>Ativo</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<tr th:each="prop : ${proprietarios}">
+			        		<td><a th:href="@{'/admin/proprietario/detalhes/' + ${prop.id}}" th:text="${prop.usuario.nome}"></a></td>
+			        		<td th:text="${prop.usuario.email}"></td>
+			        		<td th:text="${prop.telefone}"></td>
+			        		<td><i th:class="'small material-icons ' + ${prop.usuario.habilitado ? 'i-teal' : 'i-red'}" th:text="${prop.usuario.habilitado ? 'done' : 'clear'}"></i></td>
+			        	</tr>
+			        </tbody>
+              	</table>
             </div>
           </div>
         </div>

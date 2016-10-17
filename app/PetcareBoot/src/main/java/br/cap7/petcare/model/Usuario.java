@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import br.cap7.petcare.model.Papel.NomePapel;
+
 @Entity
 public class Usuario implements UserDetails {
 	
@@ -88,6 +90,24 @@ public class Usuario implements UserDetails {
 		if (!this.papeis.contains(papel)) {
 			this.papeis.add(papel);
 		}
+	}
+	
+	public boolean isAdministrador() {
+		for (Papel papel : this.papeis) {
+			if (NomePapel.ADMINISTRACAO.equals(papel.getNome())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean isProprietario() {
+		for (Papel papel : this.papeis) {
+			if (NomePapel.PROPRIETARIO.equals(papel.getNome())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
