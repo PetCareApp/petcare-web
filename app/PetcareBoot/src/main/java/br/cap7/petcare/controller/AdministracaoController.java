@@ -14,7 +14,6 @@ import br.cap7.petcare.model.Estabelecimento;
 import br.cap7.petcare.model.Proprietario;
 import br.cap7.petcare.model.TipoEstabelecimento;
 import br.cap7.petcare.model.TipoServico;
-import br.cap7.petcare.service.AdministracaoService;
 import br.cap7.petcare.service.EstabelecimentoService;
 import br.cap7.petcare.service.ProprietarioService;
 import br.cap7.petcare.service.ServicoService;
@@ -22,9 +21,6 @@ import br.cap7.petcare.service.ServicoService;
 @Controller
 @RequestMapping("/admin")
 public class AdministracaoController {
-	
-	@Autowired
-	private AdministracaoService adminService;
 	
 	@Autowired
 	private ProprietarioService proprietarioService;
@@ -45,9 +41,53 @@ public class AdministracaoController {
 	
 	@PostMapping("/proprietario/cadastrar")
 	public ModelAndView cadastrarProprietario(Proprietario proprietario) {
-		adminService.cadastrar(proprietario);
+		proprietarioService.cadastrar(proprietario);
 		return new ModelAndView("redirect:/admin/proprietario/listar");
 	}
+	
+	@GetMapping("/proprietario/excluir/{id}")
+	public ModelAndView excluirProprietario(@PathVariable("id") Proprietario proprietario) {
+		if (proprietario != null) {
+			try {
+				proprietarioService.excluir(proprietario);
+			} catch(Exception ex) {
+				return new ModelAndView("redirect:/admin/proprietario/listar");
+			}
+		}
+		return new ModelAndView("redirect:/admin/proprietario/listar");
+	}
+	
+	@GetMapping("/proprietario/editar/{id}")
+	public ModelAndView editarForm(@PathVariable("id") Proprietario proprietario) {
+		if (proprietario != null) {
+			return new ModelAndView("listar-proprietario").addObject("proprietario", proprietario)
+					.addObject("proprietarios", proprietarioService.getAll());
+		}
+		return new ModelAndView("redirect:/admin/proprietario/listar");
+	}
+	
+	@PostMapping("/proprietario/editar")
+	public ModelAndView editar(Proprietario proprietario) {
+		proprietarioService.atualizar(proprietario);
+		return new ModelAndView("redirect:/admin/proprietario/listar");
+	}
+	
+	@GetMapping("/proprietario/ativar/{id}")
+	public ModelAndView ativarProprietario(@PathVariable("id") Proprietario proprietario) {
+		if (proprietario != null) {
+			proprietarioService.ativar(proprietario);
+		}
+		return new ModelAndView("redirect:/admin/proprietario/listar");
+	}
+	
+	@GetMapping("/proprietario/desativar/{id}")
+	public ModelAndView desativarProprietario(@PathVariable("id") Proprietario proprietario) {
+		if (proprietario != null) {
+			proprietarioService.desativar(proprietario);
+		}
+		return new ModelAndView("redirect:/admin/proprietario/listar");
+	}
+	
 	
 	@GetMapping("/proprietario/detalhes/{id}")
 	public ModelAndView visualizarProprietario(@PathVariable("id")Proprietario proprietario) {

@@ -14,17 +14,18 @@
             <div class="card-content">
               <span class="card-title">Proprietários</span>
 				<form class="s12" th:action="@{/admin/proprietario/cadastrar}" th:object="${proprietario}" method="post">
+					<input th:field="*{id}" type="hidden"/>
 					<div class="row">
 						<div class="input-field col s4">
-							<input id="nome" type="text" th:field="*{usuario.nome}" />
+							<input id="nome" type="text" th:field="*{usuario.nome}" required="required"/>
 							<label for="nome">Nome</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="email" type="text" th:field="*{usuario.email}" />
+							<input id="email" type="email" th:field="*{usuario.email}" required="required"/>
 							<label for="email">Email</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="telefone" type="text" th:field="*{telefone}" />
+							<input id="telefone" type="text" th:field="*{telefone}" required="required" />
 							<label for="telefone">Telefone</label>
 						</div>
 					</div>
@@ -38,7 +39,7 @@
 			                <th>Nome</th>
 			                <th>Email</th>
 			                <th>Telefone</th>
-			                <th>Ativo</th>
+			                <th></th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -46,7 +47,16 @@
 			        		<td><a th:href="@{'/admin/proprietario/detalhes/' + ${prop.id}}" th:text="${prop.usuario.nome}"></a></td>
 			        		<td th:text="${prop.usuario.email}"></td>
 			        		<td th:text="${prop.telefone}"></td>
-			        		<td><i th:class="'small material-icons ' + ${prop.usuario.habilitado ? 'i-teal' : 'i-red'}" th:text="${prop.usuario.habilitado ? 'done' : 'clear'}"></i></td>
+			        		<td>
+			        			<a th:if="${prop.usuario.habilitado}" th:href="@{'/admin/proprietario/desativar/' + ${prop.id}}" title="desabilitar">
+			        				<i class="small material-icons i-teal">done</i>
+			        			</a>
+			        			<a th:if="${!prop.usuario.habilitado}" th:href="@{'/admin/proprietario/ativar/' + ${prop.id}}" title="habilitar">
+			        				<i class="small material-icons i-red">clear</i>
+			        			</a>
+			        			<a th:href="@{'/admin/proprietario/editar/' + ${prop.id}}" title="editar"><i class="small material-icons">create</i></a>
+			        			<a th:href="@{'/admin/proprietario/excluir/' + ${prop.id}}" title="excluir"><i class="small material-icons i-red">delete</i></a>
+			        		</td>
 			        	</tr>
 			        </tbody>
               	</table>
