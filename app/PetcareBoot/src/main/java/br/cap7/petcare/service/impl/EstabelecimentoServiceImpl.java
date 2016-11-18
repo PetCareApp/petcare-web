@@ -39,7 +39,9 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 
 	@Override
 	public void cadastrar(TipoEstabelecimento tipoEstabelecimento) {
-		tipoEstabelecimentoRepository.save(tipoEstabelecimento);
+		if (tipoEstabelecimentoRepository.findByNomeIgnoreCase(tipoEstabelecimento.getNome()) == null) {
+			tipoEstabelecimentoRepository.save(tipoEstabelecimento);
+		}
 	}
 
 	@Override
@@ -55,6 +57,11 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 	@Override
 	public List<Agendamento> getAgenda(Estabelecimento estabelecimento, Date data, StatusAgendamento status) {
 		return agendamentoRepository.findByEstabelecimentoAndDataAndStatusOrderByHoraAsc(estabelecimento, data, status);
+	}
+
+	@Override
+	public void excluir(TipoEstabelecimento tipoEstabelecimento) {
+		tipoEstabelecimentoRepository.delete(tipoEstabelecimento);
 	}
 
 }

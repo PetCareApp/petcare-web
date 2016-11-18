@@ -155,9 +155,33 @@ public class AdministracaoController {
 		return new ModelAndView("redirect:/admin/gerenciar");
 	}
 	
+	@GetMapping("tipo-estabelecimento/excluir/{id}")
+	public ModelAndView excluirTipoEstabelecimento(@PathVariable("id") TipoEstabelecimento tipoEstabelecimento) {
+		if (tipoEstabelecimento != null) {
+			try {
+				estabelecimentoService.excluir(tipoEstabelecimento);
+			} catch(Exception ex){
+				return new ModelAndView("redirect:/admin/gerenciar");
+			}
+		}
+		return new ModelAndView("redirect:/admin/gerenciar");
+	}
+	
 	@PostMapping("tipo-servico/cadastrar")
 	public ModelAndView cadastrarTipoServico(TipoServico tipoServico) {
 		servicoService.cadastrar(tipoServico);
+		return new ModelAndView("redirect:/admin/gerenciar");
+	}
+	
+	@GetMapping("tipo-servico/excluir/{id}")
+	public ModelAndView excluirTipoServico(@PathVariable("id") TipoServico tipoServico) {
+		if (tipoServico != null) {
+			try {
+				servicoService.excluir(tipoServico);
+			} catch(Exception ex) {
+				return new ModelAndView("redirect:/admin/gerenciar");
+			}
+		}
 		return new ModelAndView("redirect:/admin/gerenciar");
 	}
 	

@@ -7,5 +7,7 @@ import br.cap7.petcare.model.TipoEstabelecimento;
 
 @Repository
 public interface TipoEstabelecimentoRepository extends JpaRepository<TipoEstabelecimento, Integer> {
+	
+	TipoEstabelecimento findByNomeIgnoreCase(String nome);
 
 }

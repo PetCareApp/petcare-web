@@ -16,14 +16,21 @@
 					<form class="s12" th:action="@{/admin/tipo-estabelecimento/cadastrar}" th:object="${tipoEstabelecimento}" method="post">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nome" type="text" th:field="*{nome}" />
+								<input id="nome" type="text" th:field="*{nome}" required="required"/>
 								<label for="nome">Nome</label>
 								<button type="submit" class="waves-effect waves-light btn right">Cadastrar</button>
 							</div>
 						</div>
 					</form>
 					<ul class="collection">
-						<li th:each="tipo : ${tiposEstabelecimento}" th:text="${tipo.nome}" class="collection-item"></li>
+						<li th:each="tipo : ${tiposEstabelecimento}" class="collection-item">
+							<div>
+								<span th:text="${tipo.nome}"></span>
+								<a class="secondary-content" th:href="@{'/admin/tipo-estabelecimento/excluir/' + ${tipo.id}}" title="excluir">
+			        				<i class="small material-icons i-red">delete</i>
+			        			</a>
+			        		</div>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -35,13 +42,13 @@
 					<form class="s12" th:action="@{/admin/tipo-servico/cadastrar}" th:object="${tipoServico}" method="post">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nome" type="text" th:field="*{nome}" />
+								<input id="nome" type="text" th:field="*{nome}" required="required"/>
 								<label for="nome">Nome</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea id="descricao" class="materialize-textarea" th:field="*{descricao}"></textarea>
+								<textarea id="descricao" class="materialize-textarea" th:field="*{descricao}" required="required"></textarea>
         								<label for="descricao">Descrição</label>
 							</div>
 						</div>
@@ -52,9 +59,12 @@
 						</div>
 					</form>
 					<ul class="collection">
-						<li th:each="tipo : ${tiposServico}" class="collection-item">
+						<li th:each="tipo : ${tiposServico}" class="collection-item avatar">
 							<span th:text="${tipo.nome}" class="title bold"></span>
 							<p th:text="${tipo.descricao}"></p>
+							<a class="secondary-content" th:href="@{'/admin/tipo-servico/excluir/' + ${tipo.id}}" title="excluir">
+		        				<i class="small material-icons i-red">delete</i>
+		        			</a>
 						</li>
 					</ul>
 				</div>

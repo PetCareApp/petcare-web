@@ -27,12 +27,19 @@ public class ServicoServiceImpl implements ServicoService {
 
 	@Override
 	public void cadastrar(TipoServico tipoServico) {
-		tipoServicoRepository.save(tipoServico);
+		if (tipoServicoRepository.findByNomeIgnoreCase(tipoServico.getNome()) == null) {
+			tipoServicoRepository.save(tipoServico);
+		}
 	}
 
 	@Override
 	public void cadastrar(Servico servico) {
 		servicoRepository.save(servico);
+	}
+
+	@Override
+	public void excluir(TipoServico tipoServico) {
+		tipoServicoRepository.delete(tipoServico);
 	}
 
 }

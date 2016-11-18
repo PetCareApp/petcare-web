@@ -18,6 +18,8 @@ public interface EstabelecimentoService {
 	
 	void cadastrar(TipoEstabelecimento tipoEstabelecimento);
 	
+	void excluir(TipoEstabelecimento tipoEstabelecimento);
+	
 	void cadastrar(Estabelecimento estabelecimento);
 	
 	List<Agendamento> getAgenda(Estabelecimento estabelecimento, Date data, StatusAgendamento status);
