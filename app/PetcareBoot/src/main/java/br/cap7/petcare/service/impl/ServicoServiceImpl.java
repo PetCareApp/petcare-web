@@ -42,4 +42,14 @@ public class ServicoServiceImpl implements ServicoService {
 		tipoServicoRepository.delete(tipoServico);
 	}
 
+	@Override
+	public void excluir(Servico servico) {
+		servicoRepository.delete(servico);
+	}
+
+	@Override
+	public void atualizar(Servico servico) {
+		servicoRepository.save(servico);
+	}
+
 }

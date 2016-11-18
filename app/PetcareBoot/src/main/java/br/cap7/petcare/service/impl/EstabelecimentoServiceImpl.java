@@ -64,4 +64,14 @@ public class EstabelecimentoServiceImpl implements EstabelecimentoService {
 		tipoEstabelecimentoRepository.delete(tipoEstabelecimento);
 	}
 
+	@Override
+	public void excluir(Estabelecimento estabelecimento) {
+		estabelecimentoRepository.delete(estabelecimento);
+	}
+
+	@Override
+	public void atualizar(Estabelecimento estabelecimento) {
+		estabelecimentoRepository.save(estabelecimento);
+	}
+
 }

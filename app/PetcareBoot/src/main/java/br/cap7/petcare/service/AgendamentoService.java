@@ -13,5 +13,7 @@ public interface AgendamentoService {
 
 	void cadastrar(Agendamento agendamento);
 	
+	void excluir(Agendamento agendamento);
+	
 
 }

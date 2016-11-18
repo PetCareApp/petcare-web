@@ -63,6 +63,47 @@ public class ProprietarioController {
 		
 	}
 	
+	@GetMapping("excluir-servico/{id}")
+	public ModelAndView excluirServico(@PathVariable("id") Servico servico) {
+		if (servico == null || !servico.getEstabelecimento().getProprietario().getUsuario().getEmail()
+				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
+		}
+		try {
+			servicoService.excluir(servico);
+		} catch(Exception ex) {
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
+		}
+		return new ModelAndView("redirect:/proprietario/visualizar-estabelecimento/" + servico.getEstabelecimento().getId());
+		
+	}
+	
+	@GetMapping("editar-servico/{id}")
+	public ModelAndView editarServicoForm(@PathVariable("id") Servico servico) {
+		if (servico == null || 
+				!servico.getEstabelecimento().getProprietario().getUsuario().getEmail()
+				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
+		}
+		ModelAndView mav = new ModelAndView("proprietario/visualizar-estabelecimento");
+		mav.addObject("tipos", servicoService.getAllTipoServico());
+		mav.addObject("servico", servico);
+		return mav.addObject("estabelecimento", servico.getEstabelecimento());
+		
+	}
+	
+	@PostMapping("editar-servico")
+	public ModelAndView editarServico(Servico servico) {
+		if (servico == null || 
+				!servico.getEstabelecimento().getProprietario().getUsuario().getEmail()
+				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
+		}
+		servicoService.atualizar(servico);
+		return new ModelAndView("redirect:/proprietario/visualizar-estabelecimento/" + servico.getEstabelecimento().getId());
+		
+	}
+	
 	@GetMapping("agenda")
 	public ModelAndView getAgenda() {
 		ModelAndView mav = new ModelAndView("proprietario/agenda");
@@ -80,7 +121,18 @@ public class ProprietarioController {
 		}
 		agendamento.setEstabelecimento(estabelecimento);
 		agendamentoService.cadastrar(agendamento);
-		return new ModelAndView("redirect:/proprietario/visualizar-estabelecimento/" + estabelecimento.getId());
+		return new ModelAndView("redirect:/proprietario/agenda");
+	}
+	
+	@GetMapping("excluir-agendamento/{id}")
+	public ModelAndView excluirAgendamento(@PathVariable("id") Agendamento agendamento) {
+		if (agendamento == null || 
+				!agendamento.getEstabelecimento().getProprietario().getUsuario().getEmail()
+				.equals(SecurityContextHolder.getContext().getAuthentication().getName())) {
+			return new ModelAndView("redirect:/proprietario/listar-estabelecimentos");
+		}
+		agendamentoService.excluir(agendamento);
+		return new ModelAndView("redirect:/proprietario/agenda");
 	}
 	
 }

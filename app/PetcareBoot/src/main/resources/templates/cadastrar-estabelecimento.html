@@ -34,13 +34,14 @@
 	              <span class="card-title">Cadastrar Estabelecimento</span>
 	              <form class="s12" th:action="@{/admin/proprietario/cadastrar-estabelecimento}" th:object="${estabelecimento}" method="post">
 					<input type="hidden" name="proprietario" th:value="${proprietario.id}"/>
+					<input type="hidden" th:field="*{id}"/>
 					<div class="row">
 				        <div class="input-field col s6">
-				          <input id="nome" type="text" th:field="*{nome}"/>
+				          <input id="nome" type="text" th:field="*{nome}" required="required"/>
 				          <label for="nome">Nome</label>
 				        </div>
 				        <div class="input-field col s6">
-				          <input id="razaoSocial" type="text" th:field="*{razaoSocial}"/>
+				          <input id="razaoSocial" type="text" th:field="*{razaoSocial}" required="required"/>
 				          <label for="v">Razão Social</label>
 				        </div>
 			      	</div>
@@ -58,39 +59,39 @@
 			      	</div>
 			      	<div class="row">
 				        <div class="input-field col s6">
-				          <input id="endereco" type="text" th:field="*{endereco}"/>
+				          <input id="endereco" type="text" th:field="*{endereco}" required="required"/>
 				          <label for="endereco">Endereco</label>
 				        </div>
 				        <div class="input-field col s2">
-				          <input id="numero" type="text" th:field="*{numero}"/>
+				          <input id="numero" type="text" th:field="*{numero}" required="required"/>
 				          <label for="numero">Número</label>
 				        </div>
 				        <div class="input-field col s4">
-				          <input id="bairro" type="text" th:field="*{bairro}"/>
+				          <input id="bairro" type="text" th:field="*{bairro}" required="required"/>
 				          <label for="bairro">Bairro</label>
 				        </div>
 			      	</div>
 			      	<div class="row">
 				        <div class="input-field col s6">
-				          <input id="cidade" type="text" th:field="*{cidade}"/>
+				          <input id="cidade" type="text" th:field="*{cidade}" required="required"/>
 				          <label for="cidade">Cidade</label>
 				        </div>
 				        <div class="input-field col s2">
-				          <input id="estado" type="text" th:field="*{estado}"/>
+				          <input id="estado" type="text" th:field="*{estado}" required="required"/>
 				          <label for="estado">Estado</label>
 				        </div>
 				        <div class="input-field col s4">
-				          <input id="telefone" type="text" th:field="*{telefone}"/>
+				          <input id="telefone" type="text" th:field="*{telefone}" required="required"/>
 				          <label for="telefone">Telefone</label>
 				        </div>
 			      	</div>
 			      	<div class="row">
 				        <div class="input-field col s6">
-				          <input id="latitude" type="text" th:field="*{latitude}"/>
+				          <input id="latitude" type="text" th:field="*{latitude}" required="required"/>
 				          <label for="latitude">Latitude</label>
 				        </div>
 				        <div class="input-field col s6">
-				          <input id="longitude" type="text" th:field="*{longitude}"/>
+				          <input id="longitude" type="text" th:field="*{longitude}" required="required"/>
 				          <label for="longitude">Longitude</label>
 				        </div>
 			      	</div>

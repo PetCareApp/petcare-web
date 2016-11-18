@@ -40,6 +40,7 @@
 			                <th>Nome</th>
 			                <th>Tipo</th>
 			                <th>Endereço</th>
+			                <th></th>
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -47,6 +48,10 @@
 			        		<td th:text="${est.nome}"></td>
 			        		<td th:text="${est.tipo.nome}"></td>
 			        		<td th:text="${est.cidade} + ' - ' + ${est.estado}"></td>
+			        		<td>
+			        			<a th:href="@{'/admin/proprietario/excluir-estabelecimento/' + ${est.id}}" title="excluir"><i class="small material-icons i-red">delete</i></a>
+			        			<a th:href="@{'/admin/proprietario/editar-estabelecimento/' + ${est.id}}" title="editar"><i class="small material-icons">create</i></a>
+			        		</td>
 			        	</tr>
 			        </tbody>
 	              </table>

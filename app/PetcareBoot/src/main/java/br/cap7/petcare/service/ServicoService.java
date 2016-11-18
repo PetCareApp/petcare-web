@@ -14,5 +14,9 @@ public interface ServicoService {
 	void excluir(TipoServico tipoServico);
 	
 	void cadastrar(Servico servico);
+	
+	void excluir(Servico servico);
+	
+	void atualizar(Servico servico);
 
 }

@@ -28,6 +28,11 @@ public class AgendamentoServiceImpl implements AgendamentoService {
 		agendamento.setStatus(StatusAgendamento.DISPONIVEL);
 		agendamentoRepository.save(agendamento);
 	}
+
+	@Override
+	public void excluir(Agendamento agendamento) {
+		agendamentoRepository.delete(agendamento);
+	}
 	
 	
 

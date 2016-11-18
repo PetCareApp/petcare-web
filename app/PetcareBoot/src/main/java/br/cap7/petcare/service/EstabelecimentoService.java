@@ -22,6 +22,10 @@ public interface EstabelecimentoService {
 	
 	void cadastrar(Estabelecimento estabelecimento);
 	
+	void atualizar(Estabelecimento estabelecimento);
+	
+	void excluir(Estabelecimento estabelecimento);
+	
 	List<Agendamento> getAgenda(Estabelecimento estabelecimento, Date data, StatusAgendamento status);
 
 }

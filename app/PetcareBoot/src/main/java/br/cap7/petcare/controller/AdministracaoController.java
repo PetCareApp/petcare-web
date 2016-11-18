@@ -110,6 +110,7 @@ public class AdministracaoController {
 		return mav.addObject("estabelecimento", new Estabelecimento());
 	}
 	
+	/** Cadastrar novo estabelecimento para um proprietário */
 	@PostMapping("/proprietario/cadastrar-estabelecimento")
 	public ModelAndView cadastrarEstabelecimento(@RequestParam("proprietario") Proprietario proprietario, Estabelecimento estabelecimento) {
 		if (proprietario == null) {
@@ -118,6 +119,38 @@ public class AdministracaoController {
 		estabelecimento.setProprietario(proprietario);
 		estabelecimentoService.cadastrar(estabelecimento);
 		return new ModelAndView("redirect:/admin/proprietario/detalhes/" + proprietario.getId());
+	}
+	
+	@GetMapping("/proprietario/editar-estabelecimento/{id}")
+	public ModelAndView editarEstabelecimentoForm(@PathVariable("id") Estabelecimento estabelecimento) {
+		if (estabelecimento == null) {
+			return new ModelAndView("redirect:/admin/proprietario/listar");
+		}
+		ModelAndView mav = new ModelAndView("cadastrar-estabelecimento");
+		mav.addObject("proprietario", estabelecimento.getProprietario());
+		mav.addObject("tipos", estabelecimentoService.getAllTipoEstabelecimento());
+		return mav.addObject("estabelecimento", estabelecimento);
+	}
+	
+	@PostMapping("/proprietario/editar-estabelecimento")
+	public ModelAndView editarEstabelecimento(Estabelecimento estabelecimento) {
+		if (estabelecimento == null) {
+			return new ModelAndView("redirect:/admin/proprietario/listar");
+		}
+		estabelecimentoService.atualizar(estabelecimento);
+		return new ModelAndView("redirect:/admin/proprietario/detalhes/" + estabelecimento.getProprietario().getId());
+	}
+	
+	@GetMapping("/proprietario/excluir-estabelecimento/{id}")
+	public ModelAndView excluirEstabelecimento(@PathVariable("id") Estabelecimento estabelecimento) {
+		if (estabelecimento != null) {
+			try {
+				estabelecimentoService.excluir(estabelecimento);
+			} catch(Exception ex) {
+				return new ModelAndView("redirect:/admin/proprietario/detalhes/" + estabelecimento.getProprietario().getId());
+			}
+		}
+		return new ModelAndView("redirect:/admin/proprietario/detalhes/" + estabelecimento.getProprietario().getId());
 	}
 	
 	/** Gerenciamento de Estabelecimentos */
